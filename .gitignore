@@ -1,0 +1,6 @@
+# Files generated when building and testing the project
+bin/
+obj/
+
+# Metadata
+**/.exercism/metadata.json
