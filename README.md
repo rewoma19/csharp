@@ -4,10 +4,10 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 ## Exercises
 
-| Exercise                  | Topic                       | Solution                                                     | Learning notes                     |
-| ------------------------- | --------------------------- | ------------------------------------------------------------ | ---------------------------------- |
-| Lucian's Luscious Lasagna | Basics                      | [Code](./lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
-| Annalyn's Infiltration    | Booleans and static methods | [Code](./annalyns-infiltration/AnnalynsInfiltration.cs)      | [Notes](#annalyns-infiltration)    |
+| Exercise                  | Topic                       | Solution                                                            | Learning notes                     |
+| ------------------------- | --------------------------- | ------------------------------------------------------------------- | ---------------------------------- |
+| Lucian's Luscious Lasagna | Basics                      | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
+| Annalyn's Infiltration    | Booleans and static methods | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)    | [Notes](#annalyns-infiltration)    |
 
 ## Lucian's Luscious Lasagna
 
