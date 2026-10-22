@@ -4,9 +4,10 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 ## Exercises
 
-| Exercise                  | Topic  | Solution                                                     | Learning notes                     |
-| ------------------------- | ------ | ------------------------------------------------------------ | ---------------------------------- |
-| Lucian's Luscious Lasagna | Basics | [Code](./lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
+| Exercise                  | Topic                       | Solution                                                     | Learning notes                     |
+| ------------------------- | --------------------------- | ------------------------------------------------------------ | ---------------------------------- |
+| Lucian's Luscious Lasagna | Basics                      | [Code](./lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
+| Annalyn's Infiltration    | Booleans and static methods | [Code](./annalyns-infiltration/AnnalynsInfiltration.cs)      | [Notes](#annalyns-infiltration)    |
 
 ## Lucian's Luscious Lasagna
 
@@ -47,6 +48,68 @@ I initially left out `public`, so the tests could not call my methods. When addi
 
 My test run reported **7 succeeded, 0 failed, and 0 skipped**. A skipped test does not run and counts as neither passed nor failed.
 
+## Annalyn's Infiltration
+
+### What I learned
+
+- `bool` holds either `true` or `false`. Before a method name, it means the method returns a Boolean value.
+- `!` means NOT: it flips `true` to `false` and `false` to `true`.
+- `&&` means AND: both conditions must be true. `||` means OR: at least one condition must be true.
+- A `static` method belongs to the class itself. I call it using the class name without creating an object.
+- Local variables such as `escapeOptionOne` and `escapeOptionTwo` give names to conditions, making the rescue rules easier to follow.
+
+### Example to remember
+
+```csharp
+static class QuestLogic
+{
+    public static bool CanFastAttack(bool knightIsAwake)
+    {
+        return !knightIsAwake;
+    }
+}
+```
+
+Call it using the class name:
+
+```csharp
+bool canAttack = QuestLogic.CanFastAttack(false);
+// canAttack is true because the knight is asleep.
+```
+
+In `public static bool CanFastAttack(bool knightIsAwake)`, `public` allows callers outside the class to access the method, `static` means no object is needed, and the first `bool` is the return type. `bool knightIsAwake` declares the input parameter.
+
+### Static methods versus instance methods
+
+An **instance** is an individual object created from a class. The earlier `Lasagna` methods are instance methods, so I create a `Lasagna` object first:
+
+```csharp
+Lasagna lasagna = new Lasagna();
+int prepMinutes = lasagna.PreparationTimeInMinutes(3);
+```
+
+The quest methods use the values passed into them and do not need information stored in an individual object, so static methods suit this exercise.
+
+`QuestLogic` is also declared as a **static class**. I cannot create it with `new QuestLogic()`. To turn the earlier example into an instance method, I would need to remove `static` from both the class and the method.
+
+`static` does not mean “cannot change.” A static field (a variable declared in a class) can hold a changing value shared across instances. An instance field gives each object its own value. A static method cannot directly access instance fields without an object to access them through.
+
+### Reading the rescue logic
+
+My solution names two ways to escape:
+
+```csharp
+bool escapeOptionOne = petDogIsPresent && !archerIsAwake;
+bool escapeOptionTwo = !petDogIsPresent && (prisonerIsAwake && !knightIsAwake && !archerIsAwake);
+return escapeOptionOne || escapeOptionTwo;
+```
+
+With the dog, the archer must be asleep. Without the dog, the prisoner must be awake and both guards must be asleep. The final `||` returns `true` if either escape option is possible.
+
+### Verification
+
+These examples were checked against the exercise source and test names.
+
 ## Commands and project files
 
 Run commands from the exercise folder:
@@ -58,3 +121,27 @@ dotnet test
 This restores required packages, builds the code, and runs the tests. Packages are reusable code the project depends on. `dotnet test --no-restore` skips the restore step and is useful when the required packages have already been restored.
 
 Building creates `bin/` for compiled output and supporting libraries, and `obj/` for intermediate build files. The repository's [.gitignore](./.gitignore) ignores these folders in every exercise. Source code, tests, and project files still belong in version control.
+
+### Running selected tests
+
+I can select tests without changing the test file. First, list their names:
+
+```bash
+dotnet test --list-tests
+```
+
+Then run only the fast-attack tests:
+
+```bash
+dotnet test --filter "FullyQualifiedName~fast_attack"
+```
+
+`FullyQualifiedName` is the full test name, including its namespace and class when present. `~` means “contains.” The filter matches **test names**, not the exercise method names. Here the tests contain `fast_attack`, so filtering by `CanFastAttack` would not select them.
+
+To run both fast-attack and spying tests, use `|` to join the filters with OR:
+
+```bash
+dotnet test --filter "FullyQualifiedName~fast_attack|FullyQualifiedName~spy"
+```
+
+Filtering controls which tests run; the project still needs to compile. Run `dotnet test` without a filter to check the whole exercise.
