@@ -4,10 +4,11 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 ## Exercises
 
-| Exercise                  | Topic                       | Solution                                                            | Learning notes                     |
-| ------------------------- | --------------------------- | ------------------------------------------------------------------- | ---------------------------------- |
-| Lucian's Luscious Lasagna | Basics                      | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
-| Annalyn's Infiltration    | Booleans and static methods | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)    | [Notes](#annalyns-infiltration)    |
+| Exercise                  | Topic                               | Solution                                                            | Learning notes                     |
+| ------------------------- | ----------------------------------- | ------------------------------------------------------------------- | ---------------------------------- |
+| Lucian's Luscious Lasagna | Basics                              | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
+| Annalyn's Infiltration    | Booleans and static methods         | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)    | [Notes](#annalyns-infiltration)    |
+| Cars, Assemble!           | Numbers, conditions and conversions | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)               | [Notes](#cars-assemble)            |
 
 ## Lucian's Luscious Lasagna
 
@@ -110,38 +111,47 @@ With the dog, the archer must be asleep. Without the dog, the prisoner must be a
 
 These examples were checked against the exercise source and test names.
 
-## Commands and project files
+## Cars, Assemble!
 
-Run commands from the exercise folder:
+### What I learned
 
-```bash
-dotnet test
+- `int` stores whole numbers; `double` can store fractional values such as `0.9` and `1193.4`.
+- A range check needs two comparisons joined with `&&`: `speed >= 1 && speed <= 4` means speed is at least 1 AND at most 4.
+- Dividing two integers discards the fractional part. `90 / 100` gives `0`, while `90.0 / 100` gives `0.9`.
+- A local variable can be declared without a starting value, but every path that reaches a read of it must assign it first.
+- A cast such as `(int)19.89` explicitly converts a value to another type. This conversion discards the fractional part, giving `19`; it does not round to the nearest integer.
+
+### Declaring a variable before assigning it
+
+```csharp
+double successRate;
 ```
 
-This restores required packages, builds the code, and runs the tests. Packages are reusable code the project depends on. `dotnet test --no-restore` skips the restore step and is useful when the required packages have already been restored.
+This declares an **uninitialized local variable**, not an undefined variable. C# knows its name and type, but it has no assigned value yet.
 
-Building creates `bin/` for compiled output and supporting libraries, and `obj/` for intermediate build files. The repository's [.gitignore](./.gitignore) ignores these folders in every exercise. Source code, tests, and project files still belong in version control.
-
-### Running selected tests
-
-I can select tests without changing the test file. First, list their names:
-
-```bash
-dotnet test --list-tests
+```csharp
+double successRate;
+if (speed == 0)
+{
+    successRate = 0.0;
+}
+else
+{
+    successRate = 1.0;
+}
+return successRate;
 ```
 
-Then run only the fast-attack tests:
+This simplified example is valid because both branches assign a value before `return` reads it. In my full `SuccessRate` method, every `if`/`else if` branch assigns a value, and the final `else` covers the remaining cases. Reading an unassigned local variable causes a compiler error.
 
-```bash
-dotnet test --filter "FullyQualifiedName~fast_attack"
-```
+### Converting units
 
-`FullyQualifiedName` is the full test name, including its namespace and class when present. `~` means “contains.” The filter matches **test names**, not the exercise method names. Here the tests contain `fast_attack`, so filtering by `CanFastAttack` would not select them.
+The parentheses in `(int)(prodRatePerHr / 60)` make the division happen before the conversion. Casting the hourly rate first and then using integer division also gives the correct result for this exercise's nonnegative values, but dividing first expresses the intended calculation more clearly.
 
-To run both fast-attack and spying tests, use `|` to join the filters with OR:
+### Mistakes and fixes
 
-```bash
-dotnet test --filter "FullyQualifiedName~fast_attack|FullyQualifiedName~spy"
-```
-
-Filtering controls which tests run; the project still needs to compile. Run `dotnet test` without a filter to check the whole exercise.
+| Mistake                          | Why it fails                                                                         | Fix                        |
+| -------------------------------- | ------------------------------------------------------------------------------------ | -------------------------- |
+| `1 <= speed <= 4`                | C# cannot chain comparisons this way; the first comparison produces a Boolean value. | `speed >= 1 && speed <= 4` |
+| `double successRate = 90 / 100;` | Integer division produces `0` before it is stored as a `double`.                     | Use `0.9` or `90.0 / 100`. |
+| `int(prodRatePerHr)`             | This is not C# cast syntax.                                                          | Use `(int)prodRatePerHr`.  |
