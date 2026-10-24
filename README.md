@@ -9,6 +9,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | Lucian's Luscious Lasagna | Basics                              | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
 | Annalyn's Infiltration    | Booleans and static methods         | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)    | [Notes](#annalyns-infiltration)    |
 | Cars, Assemble!           | Numbers, conditions and conversions | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)               | [Notes](#cars-assemble)            |
+| Log Levels                | Strings and text processing         | [Code](./Strings/log-levels/LogLevels.cs)                           | [Notes](#log-levels)               |
 
 ## Lucian's Luscious Lasagna
 
@@ -155,3 +156,65 @@ The parentheses in `(int)(prodRatePerHr / 60)` make the division happen before t
 | `1 <= speed <= 4`                | C# cannot chain comparisons this way; the first comparison produces a Boolean value. | `speed >= 1 && speed <= 4` |
 | `double successRate = 90 / 100;` | Integer division produces `0` before it is stored as a `double`.                     | Use `0.9` or `90.0 / 100`. |
 | `int(prodRatePerHr)`             | This is not C# cast syntax.                                                          | Use `(int)prodRatePerHr`.  |
+
+## Log Levels
+
+### What I learned
+
+- String positions, called **indexes**, start at `0`. `IndexOf(":")` finds the first colon's index, or returns `-1` if it is absent.
+- `Substring(startIndex)` returns everything from that index to the end. `Substring(startIndex, length)` returns a specified number of characters; the second argument is a count, not an ending index.
+- `Trim()` removes whitespace, including spaces, tabs and line breaks, from both ends of a string. It does not remove whitespace inside the string.
+- Strings are **immutable**: their text cannot be changed in place. Methods such as `Trim()` and `ToLower()` return a result that I must use or store.
+- String interpolation inserts values into text: `$"{message} ({level})"`.
+
+### Extracting the message
+
+My `Message` method finds the colon, takes the text after it, and then trims that text:
+
+```csharp
+int colonIndex = logLine.IndexOf(":");
+string message = logLine.Substring(colonIndex + 1);
+return message.Trim();
+```
+
+For `"[ERROR]:  Invalid operation  "`:
+
+```text
+Substring → "  Invalid operation  "
+Trim      → "Invalid operation"
+```
+
+`colonIndex + 1` skips the colon. Trimming after extraction removes the whitespace surrounding the message.
+
+### Understanding the substring length
+
+My `LogLevel` method uses:
+
+```csharp
+string level = logLine.Substring(1, colonIndex - 2);
+return level.Trim().ToLower();
+```
+
+Starting at index `1` skips `[`. Before the colon are the level's letters and two brackets, so subtracting `2` from the colon's index gives the number of letters.
+
+| Input                | Colon index | Length (`colonIndex - 2`) | Extracted text |
+| -------------------- | ----------- | ------------------------- | -------------- |
+| `"[INFO]: Hello"`    | 6           | 4                         | `"INFO"`       |
+| `"[ERROR]: Hello"`   | 7           | 5                         | `"ERROR"`      |
+| `"[WARNING]: Hello"` | 9           | 7                         | `"WARNING"`    |
+
+The length adjusts to each level. `ToLower()` then produces `"info"`, `"error"` or `"warning"`.
+
+### Adding one versus incrementing
+
+| Expression       | Value used by `Substring()`                        | Changes `colonIndex`? |
+| ---------------- | -------------------------------------------------- | --------------------- |
+| `colonIndex + 1` | The next index                                     | No                    |
+| `++colonIndex`   | The next index, after increasing the variable      | Yes                   |
+| `colonIndex++`   | The original index, before increasing the variable | Yes                   |
+
+`++colonIndex` can skip the colon, but `colonIndex + 1` keeps the variable pointing to the colon. Using `colonIndex++` as the argument would include the colon in the extracted text.
+
+### Mistake and fix
+
+Initially, I trimmed the whole log line before extracting the message. The space after the colon was still inside that line, so trimming could not remove it. I also extracted from the original `logLine`, which still contained any trailing whitespace.
