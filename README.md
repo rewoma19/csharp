@@ -4,12 +4,13 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 ## Exercises
 
-| Exercise                  | Topic                               | Solution                                                            | Learning notes                     |
-| ------------------------- | ----------------------------------- | ------------------------------------------------------------------- | ---------------------------------- |
-| Lucian's Luscious Lasagna | Basics                              | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
-| Annalyn's Infiltration    | Booleans and static methods         | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)    | [Notes](#annalyns-infiltration)    |
-| Cars, Assemble!           | Numbers, conditions and conversions | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)               | [Notes](#cars-assemble)            |
-| Log Levels                | Strings and text processing         | [Code](./Strings/log-levels/LogLevels.cs)                           | [Notes](#log-levels)               |
+| Exercise                  | Topic                                | Solution                                                            | Learning notes                     |
+| ------------------------- | ------------------------------------ | ------------------------------------------------------------------- | ---------------------------------- |
+| Lucian's Luscious Lasagna | Basics                               | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
+| Annalyn's Infiltration    | Booleans and static methods          | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)    | [Notes](#annalyns-infiltration)    |
+| Cars, Assemble!           | Numbers, conditions and conversions  | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)               | [Notes](#cars-assemble)            |
+| Log Levels                | Strings and text processing          | [Code](./Strings/log-levels/LogLevels.cs)                           | [Notes](#log-levels)               |
+| Jedlik's Toys             | Classes, objects and instance fields | [Code](./Classes/jedliks-toys/JedliksToys.cs)                       | [Notes](#jedliks-toys)             |
 
 ## Lucian's Luscious Lasagna
 
@@ -218,3 +219,13 @@ The length adjusts to each level. `ToLower()` then produces `"info"`, `"error"` 
 ### Mistake and fix
 
 Initially, I trimmed the whole log line before extracting the message. The space after the colon was still inside that line, so trimming could not remove it. I also extracted from the original `logLine`, which still contained any trailing whitespace.
+
+## Jedlik's Toys
+
+### What I learned
+
+- A **class** is a template; an **instance** is an individual object created from it. `new RemoteControlCar()` creates a new car.
+- `Buy()` is a **static method**, called on the class: `RemoteControlCar.Buy()`. Its return type is `RemoteControlCar`, so it returns a car object.
+- **Instance fields** store each object's information between method calls. Each car has its own `_distance`, starting at `0`, and `_battery`, starting at `100`.
+- `private` restricts access to the fields to code inside the class. Public methods let callers drive the car and read its displays.
+- A `void` method returns no value. `Drive()` changes the car's stored distance and battery instead.
