@@ -11,7 +11,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | Cars, Assemble!           | Numbers, conditions and conversions  | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)               | [Notes](#cars-assemble)            |
 | Log Levels                | Strings and text processing          | [Code](./Strings/log-levels/LogLevels.cs)                           | [Notes](#log-levels)               |
 | Jedlik's Toys             | Classes, objects and instance fields | [Code](./Classes/jedliks-toys/JedliksToys.cs)                       | [Notes](#jedliks-toys)             |
-| Bird Watcher              | Arrays, constructors and loops       | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)              | [Notes](#bird-watcher)            |
+| Bird Watcher              | Arrays, constructors and loops       | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)               | [Notes](#bird-watcher)             |
 
 ## Lucian's Luscious Lasagna
 
@@ -261,61 +261,16 @@ BirdCount birdCount = new BirdCount(counts);
 
 The constructor receives `counts`. The object's field and `counts` refer to the same array, so changing an element through either reference changes that shared array.
 
-### Reading and updating today's count
-
-```csharp
-public int Today()
-{
-    return birdsPerDay[birdsPerDay.Length - 1];
-}
-
-public void IncrementTodaysCount()
-{
-    birdsPerDay[birdsPerDay.Length - 1] += 1;
-}
-```
-
-For six elements, `Length` is `6` and the last index is `5`. `Today()` returns the integer at that index. `IncrementTodaysCount()` changes the array element directly; `+= 1` adds one and stores the result back.
-
-My original code changed only a local copy:
-
-```csharp
-int todaysCount = this.Today();
-todaysCount += 1;
-```
-
-If today's stored count was `4`, the local variable became `5`, but `Today()` still returned `4`. Updating the array element fixes this.
-
 ### Checking whether a value exists
 
 ```csharp
 return Array.IndexOf(birdsPerDay, 0) != -1;
 ```
 
-Like `IndexOf` in Log Levels, `Array.IndexOf` returns the first matching index, or `-1` when it cannot find the value. Comparing the result with `-1` checks whether a zero exists.
+`Array.IndexOf` returns the first matching index, or `-1` when it cannot find the value. Comparing the result with `-1` checks whether a zero exists.
 
 My original `!= 1` checked whether the result was anything except index `1`. It incorrectly returned `true` when no zero existed, because `-1 != 1` is true. It also returned `false` when the first zero was at index `1`.
 
-### Summing counts and counting busy days
-
-A **running total** starts at zero and grows on each loop iteration. `CountForFirstDays()` adds each day's bird count, while `BusyDays()` adds one for each day with at least five birds.
-
-```csharp
-int busyDaysCt = 0;
-
-foreach (int day in birdsPerDay)
-{
-    if (day >= 5)
-    {
-        busyDaysCt += 1;
-    }
-}
-```
-
-Here, `day` is a bird count, not an index. Adding `1` counts qualifying days; adding `day` would count their birds instead.
+### Summing up values
 
 My `CountForFirstDays()` uses `birdsPerDay.AsSpan(0, numberOfDays)`. A **span** is a view of part of an existing array, not a copied array. The second argument is a length, so this selects the requested number of elements starting at index `0`. That length must fit within the array. The loop uses `i < days.Length` because an index equal to the length is already past the last element.
-
-### Verification
-
-Before the fixes, the test run reported **8 passed and 3 failed**. After correcting the array update and the `IndexOf` comparison, I reran the tests and confirmed that all tests passed.
