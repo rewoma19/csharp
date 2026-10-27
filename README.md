@@ -4,14 +4,15 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 ## Exercises
 
-| Exercise                  | Topic                                | Solution                                                            | Learning notes                     |
-| ------------------------- | ------------------------------------ | ------------------------------------------------------------------- | ---------------------------------- |
-| Lucian's Luscious Lasagna | Basics                               | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs) | [Notes](#lucians-luscious-lasagna) |
-| Annalyn's Infiltration    | Booleans and static methods          | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)    | [Notes](#annalyns-infiltration)    |
-| Cars, Assemble!           | Numbers, conditions and conversions  | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)               | [Notes](#cars-assemble)            |
-| Log Levels                | Strings and text processing          | [Code](./Strings/log-levels/LogLevels.cs)                           | [Notes](#log-levels)               |
-| Jedlik's Toys             | Classes, objects and instance fields | [Code](./Classes/jedliks-toys/JedliksToys.cs)                       | [Notes](#jedliks-toys)             |
-| Bird Watcher              | Arrays, constructors and loops       | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)               | [Notes](#bird-watcher)             |
+| Exercise                  | Topic                                | Solution                                                              | Learning notes                     |
+| ------------------------- | ------------------------------------ | --------------------------------------------------------------------- | ---------------------------------- |
+| Lucian's Luscious Lasagna | Basics                               | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)   | [Notes](#lucians-luscious-lasagna) |
+| Annalyn's Infiltration    | Booleans and static methods          | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)      | [Notes](#annalyns-infiltration)    |
+| Cars, Assemble!           | Numbers, conditions and conversions  | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                 | [Notes](#cars-assemble)            |
+| Log Levels                | Strings and text processing          | [Code](./Strings/log-levels/LogLevels.cs)                             | [Notes](#log-levels)               |
+| Jedlik's Toys             | Classes, objects and instance fields | [Code](./Classes/jedliks-toys/JedliksToys.cs)                         | [Notes](#jedliks-toys)             |
+| Bird Watcher              | Arrays, constructors and loops       | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                 | [Notes](#bird-watcher)             |
+| Interest is Interesting   | Decimals, interest and while loops   | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs) | [Notes](#interest-is-interesting)  |
 
 ## Lucian's Luscious Lasagna
 
@@ -274,3 +275,33 @@ My original `!= 1` checked whether the result was anything except index `1`. It 
 ### Summing up values
 
 My `CountForFirstDays()` uses `birdsPerDay.AsSpan(0, numberOfDays)`. A **span** is a view of part of an existing array, not a copied array. The second argument is a length, so this selects the requested number of elements starting at index `0`. That length must fit within the array. The loop uses `i < days.Length` because an index equal to the length is already past the last element.
+
+## Interest is Interesting
+
+### What I learned
+
+- `float` and `decimal` both represent numbers with fractional parts. `decimal` is normally used for money because it can represent decimal amounts more precisely.
+- A **cast** explicitly converts a value to another type. `InterestRate()` returns a `float`, so I use `(decimal)` before calculating with a `decimal` balance. C# does not directly mix `float` and `decimal` in arithmetic.
+- **Compound interest** means each year's interest is calculated using the updated balance, including previous interest. Reusing my methods also selects the correct rate when the balance crosses into a new range.
+
+### Counting years with a while loop
+
+```csharp
+public static int YearsBeforeDesiredBalance(decimal balance, decimal targetBalance)
+{
+    int years = 0;
+
+    while (balance < targetBalance) {
+        balance = AnnualBalanceUpdate(balance);
+        years++;
+    }
+
+    return years;
+}
+```
+
+Each repetition represents one year:
+
+1. Check whether the current balance is below the target.
+2. Calculate and store the balance after one more year.
+3. Increase the year count by one, then check the condition again.
