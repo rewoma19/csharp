@@ -4,16 +4,17 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 ## Exercises
 
-| Exercise                  | Topic                                | Solution                                                              | Learning notes                     |
-| ------------------------- | ------------------------------------ | --------------------------------------------------------------------- | ---------------------------------- |
-| Lucian's Luscious Lasagna | Basics                               | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)   | [Notes](#lucians-luscious-lasagna) |
-| Annalyn's Infiltration    | Booleans and static methods          | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)      | [Notes](#annalyns-infiltration)    |
-| Cars, Assemble!           | Numbers, conditions and conversions  | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                 | [Notes](#cars-assemble)            |
-| Log Levels                | Strings and text processing          | [Code](./Strings/log-levels/LogLevels.cs)                             | [Notes](#log-levels)               |
-| Jedlik's Toys             | Classes, objects and instance fields | [Code](./Classes/jedliks-toys/JedliksToys.cs)                         | [Notes](#jedliks-toys)             |
-| Bird Watcher              | Arrays, constructors and loops       | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                 | [Notes](#bird-watcher)             |
-| Interest is Interesting   | Decimals, interest and while loops   | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs) | [Notes](#interest-is-interesting)  |
-| Squeaky Clean             | Characters, Unicode and text cleanup | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                         | [Notes](#squeaky-clean)            |
+| Exercise                   | Topic                                | Solution                                                                     | Learning notes                       |
+| -------------------------- | ------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------ |
+| Lucian's Luscious Lasagna  | Basics                               | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)          | [Notes](#lucians-luscious-lasagna)   |
+| Annalyn's Infiltration     | Booleans and static methods          | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)             | [Notes](#annalyns-infiltration)      |
+| Cars, Assemble!            | Numbers, conditions and conversions  | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                        | [Notes](#cars-assemble)              |
+| Log Levels                 | Strings and text processing          | [Code](./Strings/log-levels/LogLevels.cs)                                    | [Notes](#log-levels)                 |
+| Jedlik's Toys              | Classes, objects and instance fields | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                | [Notes](#jedliks-toys)               |
+| Bird Watcher               | Arrays, constructors and loops       | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                        | [Notes](#bird-watcher)               |
+| Interest is Interesting    | Decimals, interest and while loops   | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)        | [Notes](#interest-is-interesting)    |
+| Squeaky Clean              | Characters, Unicode and text cleanup | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                | [Notes](#squeaky-clean)              |
+| Tracks on Tracks on Tracks | Generic lists and duplicate checks   | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs) | [Notes](#tracks-on-tracks-on-tracks) |
 
 ## Lucian's Luscious Lasagna
 
@@ -391,3 +392,66 @@ else if (currentChar >= '\u03B1' && currentChar <= '\u03C9') {
 I could also accumulate text with `string result = "";` and `+=`, or use a `StringBuilder` and `Append()`. Repeated string concatenation creates replacement strings and copies the accumulated text. `StringBuilder` uses a mutable buffer, which can avoid repeated copying when there are many additions. My final solution uses an array and joins it once.
 
 `var result = new StringBuilder();` and `StringBuilder result = new StringBuilder();` declare the same type. `var` asks the compiler to infer the type; it does not make the value mutable or change how it works.
+
+## Tracks on Tracks on Tracks
+
+### What I learned
+
+- `List<T>` is a **generic type**: `T` is a placeholder for the type of items it stores. `List<string>` stores strings and can grow or shrink as items are added or removed.
+- `new List<string>()` creates an empty list. A collection initializer such as `new List<string> { "C#", "Clojure", "Elm" }` creates a list with starting values in that order.
+- `.Count` is a property that gives the number of items; it needs no parentheses. `.Contains(language)` is a method that returns whether an item is present.
+- List indexes start at `0`. Before reading an item, I must check that its index is less than `.Count`.
+- A method can change a list without returning the list. Its return type tells me what, if anything, I can use from the call.
+
+### Changing a list and returning a value
+
+| List method        | What it changes                              | What it returns                      |
+| ------------------ | -------------------------------------------- | ------------------------------------ |
+| `Add(language)`    | Adds an item at the end.                     | `void`: no value.                    |
+| `Reverse()`        | Reverses the items in the existing list.     | `void`: no value.                    |
+| `Remove(language)` | Removes the first matching item, if present. | `bool`: whether an item was removed. |
+
+My exercise methods return `List<string>`, so I first change the list and then return it:
+
+```csharp
+public static List<string> AddLanguage(List<string> languages, string language)
+{
+    languages.Add(language);
+    return languages;
+}
+```
+
+The same pattern works for `ReverseList` and `RemoveLanguage`. The caller and the parameter refer to the same list, so the caller sees these changes too.
+
+My original `return languages.Add(language);` tried to return a value from a `void` method. `languages = languages.Reverse();` had the same problem. `return languages.Remove(language);` returned a Boolean where the exercise method required a list.
+
+### Checking positions safely
+
+`&&` and `||` use **short-circuit evaluation**: `&&` skips its right side when the left side is false; `||` skips its right side when the left side is true.
+
+### Finding duplicates with foreach
+
+```csharp
+public static bool IsUnique(List<string> languages)
+{
+    var uniqueLangs = new List<string>();
+
+    foreach (string lang in languages)
+    {
+        if (uniqueLangs.Contains(lang))
+        {
+            return false;
+        }
+
+        uniqueLangs.Add(lang);
+    }
+
+    return true;
+}
+```
+
+`uniqueLangs` remembers the languages already visited. I check for a match before adding the current language; adding it first would make every check find a match.
+
+For `"C#", "Elm", "C#"`, the loop remembers the first two languages, then returns `false` when it reaches the repeated `"C#"`. A `return` inside the loop exits the whole method. `return true` belongs after the loop because I can only declare the list unique after checking every item.
+
+My unfinished version declared `bool isUnique;` without assigning it. Returning directly removes the need for that variable and gives every path a result.
