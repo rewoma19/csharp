@@ -13,6 +13,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | Jedlik's Toys             | Classes, objects and instance fields | [Code](./Classes/jedliks-toys/JedliksToys.cs)                         | [Notes](#jedliks-toys)             |
 | Bird Watcher              | Arrays, constructors and loops       | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                 | [Notes](#bird-watcher)             |
 | Interest is Interesting   | Decimals, interest and while loops   | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs) | [Notes](#interest-is-interesting)  |
+| Squeaky Clean             | Characters, Unicode and text cleanup | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                         | [Notes](#squeaky-clean)            |
 
 ## Lucian's Luscious Lasagna
 
@@ -305,3 +306,88 @@ Each repetition represents one year:
 1. Check whether the current balance is below the target.
 2. Calculate and store the balance after one more year.
 3. Increase the year count by one, then check the condition again.
+
+## Squeaky Clean
+
+### What I learned
+
+- The five tasks gradually extend one `Clean` method. Each new rule must preserve the behavior required by the earlier tasks.
+- A `char` represents one UTF-16 code unit, written with single quotes, such as `'a'`. A `string` contains a sequence of these units, written with double quotes, such as `"a"` or `"CTRL"`. Some symbols, including many emoji, occupy two `char` values.
+- `char.IsControl()` detects control characters such as tabs (`'\t'`), line breaks (`'\n'`) and the null character (`'\0'`). `char.IsLetter()` recognizes letters, including letters outside the English alphabet.
+- An indexed `for` loop lets me replace array entries and inspect the next entry. Before accessing `letters[i + 1]`, I check `i + 1 < letters.Length`.
+- `string.Concat(letters)` joins the array entries. Setting an entry to `""` makes it contribute no text to the result; it does not shorten the array.
+
+### Immutable strings versus reassigning parameters
+
+Strings are immutable, but an ordinary parameter can be reassigned. `Replace` returns a result that I need to store:
+
+```csharp
+identifier = identifier.Replace(' ', '_');
+```
+
+This makes the local parameter refer to the replacement string. It does not modify the original string or reassign the caller's variable:
+
+```csharp
+string original = "my Id";
+string cleaned = Identifier.Clean(original);
+// original is "my Id"; cleaned is "my_Id".
+```
+
+`Replace` was enough for task 1. The later rules need character checks and decisions, so my solution keeps the space replacement and adds a loop.
+
+### Building and updating my array
+
+`Split()` without arguments splits around whitespace, not into individual characters. Instead, I create an array and fill each entry with a one-character string:
+
+```csharp
+string[] letters = new string[identifier.Length];
+
+for (int i = 0; i < identifier.Length; i++) {
+    letters[i] = identifier[i].ToString();
+}
+```
+
+The entries are strings so they can later hold `"CTRL"` or `""`. Assigning `character = "CTRL"` only reassigns a local variable; `letters[i] = "CTRL"` updates the array entry that will be joined into the result.
+
+### Why character[0] always uses zero
+
+For input `"ab\tc"`, the array contains `"a"`, `"b"`, `"\t"`, and `"c"`. When `i` is `2`:
+
+```csharp
+string character = letters[i]; // "\t": a string containing one tab
+char currentChar = character[0]; // '\t': the tab itself
+bool isControl = char.IsControl(currentChar); // true
+```
+
+`i` selects an array entry. `0` selects the first character inside that entry's string. The tab was at index `2` in the original input, but it is at index `0` in its own one-character string. `char.IsControl(character, 0)` is another way to check that same character.
+
+### Applying the remaining rules
+
+| Rule                    | How my implementation handles it                                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Control characters      | Replace the entry with `"CTRL"`.                                                                                    |
+| Hyphens                 | Set the hyphen entry to `""`, then uppercase the next entry with `ToUpperInvariant()` if it exists.                 |
+| Nonletters              | Remove entries for which `!char.IsLetter(currentChar)` is true, except underscores, which task 1 needs to preserve. |
+| Lowercase Greek letters | Remove characters in the inclusive range from `'\u03B1'` to `'\u03C9'`.                                             |
+
+`ToUpperInvariant()` uses casing rules that do not depend on the computer's language settings. An `if` / `else if` chain selects just one branch per iteration, so control characters and hyphens get their special handling before the removal rules.
+
+### Unicode lookalikes and the failing tests
+
+I accidentally used `⍵` (U+2375) instead of Greek lowercase `ω` (U+03C9). The larger numeric value made my range too wide and removed letters such as `ḃ` and `Ḃ`. Three tests failed because those letters disappeared.
+
+Unicode escapes avoid that visual mix-up. `\u` followed by four hexadecimal digits identifies the character directly:
+
+```csharp
+else if (currentChar >= '\u03B1' && currentChar <= '\u03C9') {
+    letters[i] = "";
+}
+```
+
+`'\u03B1'` means `'α'`, and `'\u03C9'` means `'ω'`. The comparisons include both boundaries. On a Mac, Control + Command + Space opens Character Viewer, but Unicode escapes are easier to distinguish in this check.
+
+### Other ways to build the result
+
+I could also accumulate text with `string result = "";` and `+=`, or use a `StringBuilder` and `Append()`. Repeated string concatenation creates replacement strings and copies the accumulated text. `StringBuilder` uses a mutable buffer, which can avoid repeated copying when there are many additions. My final solution uses an array and joins it once.
+
+`var result = new StringBuilder();` and `StringBuilder result = new StringBuilder();` declare the same type. `var` asks the compiler to infer the type; it does not make the value mutable or change how it works.
