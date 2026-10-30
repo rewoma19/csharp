@@ -15,6 +15,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | Interest is Interesting    | Decimals, interest and while loops   | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)        | [Notes](#interest-is-interesting)    |
 | Squeaky Clean              | Characters, Unicode and text cleanup | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                | [Notes](#squeaky-clean)              |
 | Tracks on Tracks on Tracks | Generic lists and duplicate checks   | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs) | [Notes](#tracks-on-tracks-on-tracks) |
+| Need for Speed             | Constructors and object interaction  | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                        | [Notes](#need-for-speed)             |
 
 ## Lucian's Luscious Lasagna
 
@@ -455,3 +456,84 @@ public static bool IsUnique(List<string> languages)
 For `"C#", "Elm", "C#"`, the loop remembers the first two languages, then returns `false` when it reaches the repeated `"C#"`. A `return` inside the loop exits the whole method. `return true` belongs after the loop because I can only declare the list unique after checking every item.
 
 My unfinished version declared `bool isUnique;` without assigning it. Returning directly removes the need for that variable and gives every path a result.
+
+## Need for Speed
+
+### What I learned
+
+- A **constructor** sets up a new object. It has the class's name and no return type. `new RemoteControlCar(5, 2)` passes speed and battery drain to the constructor.
+- **Instance fields** remember each car's values between method calls. Speed and battery drain describe the car; battery and total distance change as it drives.
+- `this.speed = speed;` copies the incoming parameter into the object's field. Receiving a parameter does not automatically save it for other methods.
+- A method can change an object, report a value, or create an object. `Drive()` changes the car, `DistanceDriven()` reports its distance, and `Nitro()` creates a new car.
+- One object can use another object's public methods. `RaceTrack` drives and checks the supplied car without accessing its private fields.
+
+### Setting up each car
+
+These fields and the constructor belong inside `RemoteControlCar`:
+
+```csharp
+private int battery;
+private int speed;
+private int batteryDrain;
+private int distanceDriven = 0;
+
+public RemoteControlCar(int speed, int batteryDrain)
+{
+    this.speed = speed;
+    this.battery = 100;
+    this.batteryDrain = batteryDrain;
+}
+```
+
+`RaceTrack(int distance)` follows the same pattern: `this.distance = distance;` stores the track's length for later use.
+
+### Driving changes the stored values
+
+```csharp
+public void Drive()
+{
+    if (!BatteryDrained())
+    {
+        this.distanceDriven += this.speed;
+        this.battery -= this.batteryDrain;
+    }
+}
+```
+
+`!BatteryDrained()` means the car still has enough charge for a drive. If that condition is false, neither field changes. `+=` adds to the existing value; `-=` subtracts from it.
+
+For a car with speed `5` and battery drain `2`:
+
+`Drive()` returns `void` because it changes the car rather than returning a result. `DistanceDriven()` returns the saved total without changing it.
+
+### A drained battery does not have to be empty
+
+The question is whether there is enough charge for another drive. With `40%` remaining and a drain of `60%`, the car cannot drive. When battery and drain are equal, it can drive once more, so the comparison is `<`, not `<=`.
+
+### Checking whether the car finishes
+
+This method belongs inside `RaceTrack`:
+
+```csharp
+public bool TryFinishTrack(RemoteControlCar car)
+{
+    while ((car.DistanceDriven() < this.distance) && !car.BatteryDrained())
+    {
+        car.Drive();
+    }
+
+    return car.DistanceDriven() >= this.distance;
+}
+```
+
+The loop continues while the car has not finished AND has enough battery.
+
+The final `>=` checks whether the car reached or passed the finish line. A car can succeed even if its last drive drains the battery. The method drives the supplied car, so the caller sees its updated distance and battery afterward.
+
+### Mistakes and fixes
+
+| Mistake                                                       | Why it fails                                                               | Fix                                                                               |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `var car = new RemoteControlCar();` directly inside the class | `var` cannot declare a field, and this constructor requires two arguments. | Remove the unnecessary field; the tests create cars with speed and battery drain. |
+| Receiving `batteryDrain` without saving it                    | Other methods need the drain value after the constructor finishes.         | Add a field and assign `this.batteryDrain = batteryDrain;`.                       |
+| Checking only `battery == 0`                                  | Some remaining charge may still be insufficient for a drive.               | Check `battery < batteryDrain`.                                                   |
