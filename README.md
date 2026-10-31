@@ -4,18 +4,19 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 ## Exercises
 
-| Exercise                   | Topic                                | Solution                                                                     | Learning notes                       |
-| -------------------------- | ------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------ |
-| Lucian's Luscious Lasagna  | Basics                               | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)          | [Notes](#lucians-luscious-lasagna)   |
-| Annalyn's Infiltration     | Booleans and static methods          | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)             | [Notes](#annalyns-infiltration)      |
-| Cars, Assemble!            | Numbers, conditions and conversions  | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                        | [Notes](#cars-assemble)              |
-| Log Levels                 | Strings and text processing          | [Code](./Strings/log-levels/LogLevels.cs)                                    | [Notes](#log-levels)                 |
-| Jedlik's Toys              | Classes, objects and instance fields | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                | [Notes](#jedliks-toys)               |
-| Bird Watcher               | Arrays, constructors and loops       | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                        | [Notes](#bird-watcher)               |
-| Interest is Interesting    | Decimals, interest and while loops   | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)        | [Notes](#interest-is-interesting)    |
-| Squeaky Clean              | Characters, Unicode and text cleanup | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                | [Notes](#squeaky-clean)              |
-| Tracks on Tracks on Tracks | Generic lists and duplicate checks   | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs) | [Notes](#tracks-on-tracks-on-tracks) |
-| Need for Speed             | Constructors and object interaction  | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                        | [Notes](#need-for-speed)             |
+| Exercise                   | Topic                                 | Solution                                                                     | Learning notes                       |
+| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------ |
+| Lucian's Luscious Lasagna  | Basics                                | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)          | [Notes](#lucians-luscious-lasagna)   |
+| Annalyn's Infiltration     | Booleans and static methods           | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)             | [Notes](#annalyns-infiltration)      |
+| Cars, Assemble!            | Numbers, conditions and conversions   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                        | [Notes](#cars-assemble)              |
+| Log Levels                 | Strings and text processing           | [Code](./Strings/log-levels/LogLevels.cs)                                    | [Notes](#log-levels)                 |
+| Jedlik's Toys              | Classes, objects and instance fields  | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                | [Notes](#jedliks-toys)               |
+| Bird Watcher               | Arrays, constructors and loops        | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                        | [Notes](#bird-watcher)               |
+| Interest is Interesting    | Decimals, interest and while loops    | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)        | [Notes](#interest-is-interesting)    |
+| Squeaky Clean              | Characters, Unicode and text cleanup  | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                | [Notes](#squeaky-clean)              |
+| Tracks on Tracks on Tracks | Generic lists and duplicate checks    | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs) | [Notes](#tracks-on-tracks-on-tracks) |
+| Need for Speed             | Constructors and object interaction   | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                        | [Notes](#need-for-speed)             |
+| Roll the Die!              | Randomness and shared instance fields | [Code](./Randomness/roll-the-die/RollTheDie.cs)                              | [Notes](#roll-the-die)               |
 
 ## Lucian's Luscious Lasagna
 
@@ -537,3 +538,42 @@ The final `>=` checks whether the car reached or passed the finish line. A car c
 | `var car = new RemoteControlCar();` directly inside the class | `var` cannot declare a field, and this constructor requires two arguments. | Remove the unnecessary field; the tests create cars with speed and battery drain. |
 | Receiving `batteryDrain` without saving it                    | Other methods need the drain value after the constructor finishes.         | Add a field and assign `this.batteryDrain = batteryDrain;`.                       |
 | Checking only `battery == 0`                                  | Some remaining charge may still be insufficient for a drive.               | Check `battery < batteryDrain`.                                                   |
+
+## Roll the Die!
+
+### What I learned
+
+- `Random` is a class in the `System` namespace. A **namespace** groups related types. The normal import is `using System;`, not `using System.Random;`.
+- This project enables **implicit usings** with `<ImplicitUsings>enable</ImplicitUsings>`, so `System` is imported automatically and I can write `Random` without adding an import.
+- `Next(min, max)` returns a random whole number including `min` but excluding `max`. `Next(1, 19)` therefore gives a die roll from 1 through 18.
+- `NextDouble()` returns a `double` from 0.0 up to, but excluding, 1.0.
+- A **local variable** declared inside a method is available only within its scope. An **instance field** declared inside the class, outside its methods, can be reused by both methods. Each `Player` gets its own generator.
+
+### Creating the generator once
+
+My solution reuses one generator for both methods:
+
+```csharp
+public class Player
+{
+    private readonly Random random = new Random();
+
+    public int RollDie()
+    {
+        return random.Next(1, 19);
+    }
+
+    public double GenerateSpellStrength()
+    {
+        double min = 0.0;
+        double max = 100.0;
+        return random.NextDouble() * (max - min) + min;
+    }
+}
+```
+
+In `Random random = new Random();`, the first `Random` is the type, `random` is the field name, and `new Random()` creates the generator. `private` limits access to code inside `Player`.
+
+`readonly` means I cannot replace the field's generator after initialization or construction. It does not freeze the generator: calling its methods still produces new random values, which can sometimes repeat.
+
+`random.NextDouble() * (max - min) + min` multiplies by the range's width, then shifts the result to start at `min`. Here, `min` is 0 and `max` is 100, so this is equivalent to `random.NextDouble() * 100`.

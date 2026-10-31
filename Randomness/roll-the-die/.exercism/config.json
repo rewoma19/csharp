@@ -1,0 +1,26 @@
+{
+  "authors": [
+    "mikedamay"
+  ],
+  "contributors": [
+    "ErikSchierboom",
+    "yzAlvin",
+    "aage",
+    "karanchadha10"
+  ],
+  "files": {
+    "solution": [
+      "RollTheDie.cs"
+    ],
+    "test": [
+      "RollTheDieTests.cs"
+    ],
+    "exemplar": [
+      ".meta/Exemplar.cs"
+    ],
+    "invalidator": [
+      "RollTheDie.csproj"
+    ]
+  },
+  "blurb": "Learn about randomness by generating numbers in a game."
+}
