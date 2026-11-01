@@ -17,6 +17,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | Tracks on Tracks on Tracks | Generic lists and duplicate checks    | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs) | [Notes](#tracks-on-tracks-on-tracks) |
 | Need for Speed             | Constructors and object interaction   | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                        | [Notes](#need-for-speed)             |
 | Roll the Die!              | Randomness and shared instance fields | [Code](./Randomness/roll-the-die/RollTheDie.cs)                              | [Notes](#roll-the-die)               |
+| Booking up for Beauty      | Dates, times, parsing and formatting  | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)              | [Notes](#booking-up-for-beauty)      |
 
 ## Lucian's Luscious Lasagna
 
@@ -577,3 +578,67 @@ In `Random random = new Random();`, the first `Random` is the type, `random` is 
 `readonly` means I cannot replace the field's generator after initialization or construction. It does not freeze the generator: calling its methods still produces new random values, which can sometimes repeat.
 
 `random.NextDouble() * (max - min) + min` multiplies by the range's width, then shifts the result to start at `min`. Here, `min` is 0 and `max` is 100, so this is equivalent to `random.NextDouble() * 100`.
+
+## Booking up for Beauty
+
+### What I learned
+
+- `DateTime` stores both a date and a time. It is **immutable**: operations such as `AddDays()` return a new value, so I must use or store the result.
+- **Parsing** converts text into a value I can work with. `DateTime.Parse(appointmentDateDescription)` converts the appointment text into a `DateTime`.
+- `DateTime.Now` gives the current local date and time.
+- `appointmentDate.TimeOfDay` returns a `TimeSpan` representing the time elapsed since midnight.
+- **Formatting** converts a value into text. `ToString("M/d/yyyy h:mm:ss tt")` controls how the appointment date and time appear in the description.
+
+### Parsing the appointment text
+
+```csharp
+public static DateTime Schedule(string appointmentDateDescription)
+{
+    return DateTime.Parse(appointmentDateDescription);
+}
+```
+
+For `"7/25/2019 13:45:00"`, this returns a value equivalent to `new DateTime(2019, 7, 25, 13, 45, 0)`.
+
+**Culture** in this context means the language and regional conventions used to interpret or display date and time values. This exercise's tests set the culture to `en-US`, so `Parse` understands the numeric dates, month names, and weekday names without extra configuration. Text that cannot be parsed as a date causes a `FormatException`.
+
+### Understanding the unfinished-method placeholder
+
+The exercise originally contained a line like this:
+
+```csharp
+throw new NotImplementedException("Please implement Appointment.Schedule()");
+```
+
+| Part                      | Meaning                                                        |
+| ------------------------- | -------------------------------------------------------------- |
+| `NotImplementedException` | The exception type that signals unfinished code.               |
+| `new`                     | Creates an exception object containing the supplied message.   |
+| `throw`                   | Raises the exception and stops normal execution of the method. |
+
+An **exception** signals a problem while the program is running. Code can catch and handle it; if it goes unhandled, it can stop the program. In this exercise, the test runner reports the thrown placeholder exception as a failed test. Implementing the method means replacing that placeholder with working code.
+
+### Checking the afternoon boundaries
+
+My solution creates these values inside `IsAfternoonAppointment`:
+
+```csharp
+TimeSpan timeOfTheDay = appointmentDate.TimeOfDay;
+TimeSpan afternoonStart = new TimeSpan(12, 0, 0);
+TimeSpan afternoonEnd = new TimeSpan(18, 0, 0);
+```
+
+The three constructor arguments are hours, minutes, and seconds. My condition is:
+
+```csharp
+timeOfTheDay >= afternoonStart && timeOfTheDay < afternoonEnd
+```
+
+Both comparisons must be true. Noon is included because of `>=`; 6 PM is excluded because of `<`. This builds on the range checks and `&&` used in earlier exercises.
+
+| Appointment time | Is afternoon? |
+| ---------------- | ------------- |
+| `11:59:59`       | `false`       |
+| `12:00:00`       | `true`        |
+| `17:59:59`       | `true`        |
+| `18:00:00`       | `false`       |
