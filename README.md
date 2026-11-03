@@ -4,20 +4,23 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 ## Exercises
 
-| Exercise                   | Topic                                 | Solution                                                                     | Learning notes                       |
-| -------------------------- | ------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------ |
-| Lucian's Luscious Lasagna  | Basics                                | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)          | [Notes](#lucians-luscious-lasagna)   |
-| Annalyn's Infiltration     | Booleans and static methods           | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)             | [Notes](#annalyns-infiltration)      |
-| Cars, Assemble!            | Numbers, conditions and conversions   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                        | [Notes](#cars-assemble)              |
-| Log Levels                 | Strings and text processing           | [Code](./Strings/log-levels/LogLevels.cs)                                    | [Notes](#log-levels)                 |
-| Jedlik's Toys              | Classes, objects and instance fields  | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                | [Notes](#jedliks-toys)               |
-| Bird Watcher               | Arrays, constructors and loops        | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                        | [Notes](#bird-watcher)               |
-| Interest is Interesting    | Decimals, interest and while loops    | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)        | [Notes](#interest-is-interesting)    |
-| Squeaky Clean              | Characters, Unicode and text cleanup  | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                | [Notes](#squeaky-clean)              |
-| Tracks on Tracks on Tracks | Generic lists and duplicate checks    | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs) | [Notes](#tracks-on-tracks-on-tracks) |
-| Need for Speed             | Constructors and object interaction   | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                        | [Notes](#need-for-speed)             |
-| Roll the Die!              | Randomness and shared instance fields | [Code](./Randomness/roll-the-die/RollTheDie.cs)                              | [Notes](#roll-the-die)               |
-| Booking up for Beauty      | Dates, times, parsing and formatting  | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)              | [Notes](#booking-up-for-beauty)      |
+<!-- Keep this table in the order: #, Topic, Exercise, Solution, Learning notes. Number entries sequentially from 1 and continue this format when adding exercises. -->
+
+| #   | Topic                                  | Exercise                   | Solution                                                                     | Learning notes                       |
+| --- | -------------------------------------- | -------------------------- | ---------------------------------------------------------------------------- | ------------------------------------ |
+| 1   | Basics                                 | Lucian's Luscious Lasagna  | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)          | [Notes](#lucians-luscious-lasagna)   |
+| 2   | Booleans and static methods            | Annalyn's Infiltration     | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)             | [Notes](#annalyns-infiltration)      |
+| 3   | Numbers, conditions and conversions    | Cars, Assemble!            | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                        | [Notes](#cars-assemble)              |
+| 4   | Strings and text processing            | Log Levels                 | [Code](./Strings/log-levels/LogLevels.cs)                                    | [Notes](#log-levels)                 |
+| 5   | Classes, objects and instance fields   | Jedlik's Toys              | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                | [Notes](#jedliks-toys)               |
+| 6   | Arrays, constructors and loops         | Bird Watcher               | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                        | [Notes](#bird-watcher)               |
+| 7   | Decimals, interest and while loops     | Interest is Interesting    | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)        | [Notes](#interest-is-interesting)    |
+| 8   | Characters, Unicode and text cleanup   | Squeaky Clean              | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                | [Notes](#squeaky-clean)              |
+| 9   | Generic lists and duplicate checks     | Tracks on Tracks on Tracks | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs) | [Notes](#tracks-on-tracks-on-tracks) |
+| 10  | Constructors and object interaction    | Need for Speed             | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                        | [Notes](#need-for-speed)             |
+| 11  | Randomness and shared instance fields  | Roll the Die!              | [Code](./Randomness/roll-the-die/RollTheDie.cs)                              | [Notes](#roll-the-die)               |
+| 12  | Dates, times, parsing and formatting   | Booking up for Beauty      | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)              | [Notes](#booking-up-for-beauty)      |
+| 13  | Nullability, ternaries and null checks | Tim from Marketing         | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                 | [Notes](#tim-from-marketing)         |
 
 ## Lucian's Luscious Lasagna
 
@@ -642,3 +645,84 @@ Both comparisons must be true. Noon is included because of `>=`; 6 PM is exclude
 | `12:00:00`       | `true`        |
 | `17:59:59`       | `true`        |
 | `18:00:00`       | `false`       |
+
+
+## Tim from Marketing
+
+### What I learned
+
+- `null` means a value is absent. `int?` can hold an integer or `null`; `string?` marks a string reference as possibly null for the compiler's checks. An empty string (`""`) is still a string value, not `null`.
+- The **ternary operator**, `condition ? valueWhenTrue : valueWhenFalse`, chooses between two expressions. Only the chosen expression is evaluated.
+- `is` checks whether a value matches a **pattern**, such as `null` or a type. `id is null` returns a Boolean; `id is not null` reverses that check.
+- The **null-coalescing operator**, `??`, supplies a fallback value without assigning it. The **null-coalescing assignment operator**, `??=`, assigns the fallback only when the variable is null.
+- `?.` calls a member only when the value is not null. For example, `department?.ToUpper()` returns uppercase text or `null`; it does not supply an `"OWNER"` fallback by itself.
+
+### My completed solution
+
+```csharp
+static class Badge
+{
+    public static string Print(int? id, string name, string? department)
+    {
+        string printPrefix = id is null ? "" : $"[{id}] - ";
+        department ??= "Owner";
+
+        return $"{printPrefix}{name} - {department.ToUpper()}";
+    }
+}
+```
+
+The prefix includes the brackets and separator so they disappear together when the ID is missing. Both branches of the ternary produce strings. String interpolation inserts that prefix and the name into the badge text, building on the Log Levels exercise.
+
+Assigning `"Owner"` before calling `ToUpper()` ensures the department is no longer null. `ToUpper()` returns uppercase text, so `"Owner"` becomes `"OWNER"` without changing the string in place.
+
+### Reading the ternary as if/else
+
+```csharp
+string printPrefix;
+
+if (id is null)
+{
+    printPrefix = "";
+}
+else
+{
+    printPrefix = $"[{id}] - ";
+}
+```
+
+`is null` performs the check; `? :` chooses which string to use. The `?` in `int?` has a different role: it makes the integer type nullable.
+
+### is versus ==
+
+For my `int? id`, `id is null` and `id == null` give the same result. `==` checks equality, while `is` matches a pattern. Custom types can redefine `==`, which is called **operator overloading**, but they cannot redefine the behavior of `is null`.
+
+| Expression | What it checks |
+| ---------- | -------------- |
+| `id is null` | Whether the ID is absent. |
+| `id is not null` | Whether the ID has a value. |
+| `id == 734` | Whether the ID equals 734. |
+| `value is string` | Whether the value is a string. |
+
+### Mistakes and fixes
+
+| Mistake | Why it fails | Fix |
+| ------- | ------------ | --- |
+| `id ?? ""` | An `int?` cannot use a string as its fallback this way. | Use `id is null ? "" : $"[{id}] - "` to choose between two strings. |
+| `department ?? "Owner";` | It does not assign the result, and this expression is not a valid standalone C# statement. | Use `department ??= "Owner";` or `department = department ?? "Owner";`. |
+| Calling `department.ToUpper()` while it might still be null | Calling an instance method on null throws a `NullReferenceException`. | Assign the fallback first, then uppercase the resulting string. |
+
+`department ??= "Owner";` is equivalent here to:
+
+```csharp
+if (department is null)
+{
+    department = "Owner";
+}
+```
+
+An existing department such as `"Marketing"` stays unchanged by this assignment. As with reassigning the parameter in Squeaky Clean, this changes the local parameter, not the caller's variable.
+
+### Verification
+
+I confirmed that all tests pass after the fix. The exercise tests cover an employee with an ID, an employee without an ID, an owner with an ID, and an owner without an ID. This records my reported test result; the tests were not rerun for this notes update.
