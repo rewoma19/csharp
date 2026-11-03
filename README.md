@@ -6,21 +6,22 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 <!-- Keep this table in the order: #, Topic, Exercise, Solution, Learning notes. Number entries sequentially from 1 and continue this format when adding exercises. -->
 
-| #   | Topic                                  | Exercise                   | Solution                                                                     | Learning notes                       |
-| --- | -------------------------------------- | -------------------------- | ---------------------------------------------------------------------------- | ------------------------------------ |
-| 1   | Basics                                 | Lucian's Luscious Lasagna  | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)          | [Notes](#lucians-luscious-lasagna)   |
-| 2   | Booleans and static methods            | Annalyn's Infiltration     | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)             | [Notes](#annalyns-infiltration)      |
-| 3   | Numbers, conditions and conversions    | Cars, Assemble!            | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                        | [Notes](#cars-assemble)              |
-| 4   | Strings and text processing            | Log Levels                 | [Code](./Strings/log-levels/LogLevels.cs)                                    | [Notes](#log-levels)                 |
-| 5   | Classes, objects and instance fields   | Jedlik's Toys              | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                | [Notes](#jedliks-toys)               |
-| 6   | Arrays, constructors and loops         | Bird Watcher               | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                        | [Notes](#bird-watcher)               |
-| 7   | Decimals, interest and while loops     | Interest is Interesting    | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)        | [Notes](#interest-is-interesting)    |
-| 8   | Characters, Unicode and text cleanup   | Squeaky Clean              | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                | [Notes](#squeaky-clean)              |
-| 9   | Generic lists and duplicate checks     | Tracks on Tracks on Tracks | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs) | [Notes](#tracks-on-tracks-on-tracks) |
-| 10  | Constructors and object interaction    | Need for Speed             | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                        | [Notes](#need-for-speed)             |
-| 11  | Randomness and shared instance fields  | Roll the Die!              | [Code](./Randomness/roll-the-die/RollTheDie.cs)                              | [Notes](#roll-the-die)               |
-| 12  | Dates, times, parsing and formatting   | Booking up for Beauty      | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)              | [Notes](#booking-up-for-beauty)      |
-| 13  | Nullability, ternaries and null checks | Tim from Marketing         | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                 | [Notes](#tim-from-marketing)         |
+| #   | Topic                                    | Exercise                          | Solution                                                                                    | Learning notes                              |
+| --- | ---------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| 1   | Basics                                   | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
+| 2   | Booleans and static methods              | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
+| 3   | Numbers, conditions and conversions      | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
+| 4   | Strings and text processing              | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
+| 5   | Classes, objects and instance fields     | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
+| 6   | Arrays, constructors and loops           | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
+| 7   | Decimals, interest and while loops       | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
+| 8   | Characters, Unicode and text cleanup     | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
+| 9   | Generic lists and duplicate checks       | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
+| 10  | Constructors and object interaction      | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
+| 11  | Randomness and shared instance fields    | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
+| 12  | Dates, times, parsing and formatting     | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
+| 13  | Nullability, ternaries and null checks   | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
+| 14  | Dictionaries, keys and value collections | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
 
 ## Lucian's Luscious Lasagna
 
@@ -646,7 +647,6 @@ Both comparisons must be true. Noon is included because of `>=`; 6 PM is exclude
 | `17:59:59`       | `true`        |
 | `18:00:00`       | `false`       |
 
-
 ## Tim from Marketing
 
 ### What I learned
@@ -697,20 +697,20 @@ else
 
 For my `int? id`, `id is null` and `id == null` give the same result. `==` checks equality, while `is` matches a pattern. Custom types can redefine `==`, which is called **operator overloading**, but they cannot redefine the behavior of `is null`.
 
-| Expression | What it checks |
-| ---------- | -------------- |
-| `id is null` | Whether the ID is absent. |
-| `id is not null` | Whether the ID has a value. |
-| `id == 734` | Whether the ID equals 734. |
+| Expression        | What it checks                 |
+| ----------------- | ------------------------------ |
+| `id is null`      | Whether the ID is absent.      |
+| `id is not null`  | Whether the ID has a value.    |
+| `id == 734`       | Whether the ID equals 734.     |
 | `value is string` | Whether the value is a string. |
 
 ### Mistakes and fixes
 
-| Mistake | Why it fails | Fix |
-| ------- | ------------ | --- |
-| `id ?? ""` | An `int?` cannot use a string as its fallback this way. | Use `id is null ? "" : $"[{id}] - "` to choose between two strings. |
-| `department ?? "Owner";` | It does not assign the result, and this expression is not a valid standalone C# statement. | Use `department ??= "Owner";` or `department = department ?? "Owner";`. |
-| Calling `department.ToUpper()` while it might still be null | Calling an instance method on null throws a `NullReferenceException`. | Assign the fallback first, then uppercase the resulting string. |
+| Mistake                                                     | Why it fails                                                                               | Fix                                                                     |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| `id ?? ""`                                                  | An `int?` cannot use a string as its fallback this way.                                    | Use `id is null ? "" : $"[{id}] - "` to choose between two strings.     |
+| `department ?? "Owner";`                                    | It does not assign the result, and this expression is not a valid standalone C# statement. | Use `department ??= "Owner";` or `department = department ?? "Owner";`. |
+| Calling `department.ToUpper()` while it might still be null | Calling an instance method on null throws a `NullReferenceException`.                      | Assign the fallback first, then uppercase the resulting string.         |
 
 `department ??= "Owner";` is equivalent here to:
 
@@ -726,3 +726,88 @@ An existing department such as `"Marketing"` stays unchanged by this assignment.
 ### Verification
 
 I confirmed that all tests pass after the fix. The exercise tests cover an employee with an ID, an employee without an ID, an owner with an ID, and an owner without an ID. This records my reported test result; the tests were not rerun for this notes update.
+
+## International Calling Connoisseur
+
+### What I learned
+
+- `Dictionary<int, string>` stores **key/value pairs**: each integer dialing code is a key associated with a string country name. Keys are unique.
+- `dictionary[countryCode]` looks up a value by its key, not by its position. Even though this dictionary has integer keys, they are not list indexes.
+- `ContainsKey(countryCode)` checks whether a key exists. Reading a missing key with `[]` throws a `KeyNotFoundException`; my lookup method checks first and returns `string.Empty` when the code is absent.
+- Assigning `dictionary[countryCode] = countryName` replaces an existing value or adds a new entry if the key is absent. Task 7 requires updating only existing entries, so I check `ContainsKey()` before assigning.
+- Like the lists in Tracks on Tracks on Tracks, a dictionary can change without being returned by the method that changes it. Changing the collection and returning a result are separate actions.
+
+### Changing the dictionary and returning it
+
+| Operation                       | What it does                                                | What it returns                     |
+| ------------------------------- | ----------------------------------------------------------- | ----------------------------------- |
+| `Add(countryCode, countryName)` | Adds a pair; throws an exception if the key already exists. | `void`: no value.                   |
+| `Remove(countryCode)`           | Removes the pair if the key exists.                         | `bool`: whether a pair was removed. |
+| `ContainsKey(countryCode)`      | Checks for the key without changing anything.               | `bool`: whether the key exists.     |
+
+My exercise methods return `Dictionary<int, string>`, so I change the dictionary first and then return it:
+
+```csharp
+public static Dictionary<int, string> AddCountryToExistingDictionary(
+    Dictionary<int, string> existingDictionary, int countryCode, string countryName)
+{
+    existingDictionary.Add(countryCode, countryName);
+    return existingDictionary;
+}
+```
+
+The caller and the parameter refer to the same dictionary, so the caller sees the added entry. Returning it does not create a copy. A bare `return;` cannot satisfy a method that promises to return a dictionary.
+
+My removal method checks the key before calling `Remove()`. That works, but the check is optional here: removing a missing key simply returns `false` and leaves the dictionary unchanged.
+
+### What .Values returns
+
+For this dictionary, `.Values` returns a `Dictionary<int, string>.ValueCollection` containing the country names without their keys. It is a **live view**: changes to the dictionary are reflected in the collection. It is not a list and does not support positional access with `[i]`.
+
+| Operation                  | `existingDictionary.Values` | `List<string>` |
+| -------------------------- | --------------------------- | -------------- |
+| Read `.Count`              | Yes                         | Yes            |
+| Loop with `foreach`        | Yes                         | Yes            |
+| Access an item using `[i]` | No                          | Yes            |
+
+To use my preferred regular `for` loop, I copy the current values into a list:
+
+```csharp
+var countryNames = new List<string>(existingDictionary.Values);
+```
+
+The list is a separate collection. Later dictionary changes do not update it. This enables indexing but uses extra storage; a `foreach` loop over `.Values` would not need that copy.
+
+### Finding the longest name with a for loop
+
+My completed method is:
+
+```csharp
+public static string FindLongestCountryName(Dictionary<int, string> existingDictionary)
+{
+    string longestCountryName = string.Empty;
+    var countryNames = new List<string>(existingDictionary.Values);
+
+    for (int i = 0; i < countryNames.Count; i++) {
+        if (countryNames[i].Length > longestCountryName.Length) {
+            longestCountryName = countryNames[i];
+        }
+    }
+
+    return longestCountryName;
+}
+```
+
+`longestCountryName` remembers the longest name found so far. I compare the current name's `.Length` with the saved name's `.Length`, then save the name itself when it is longer. `.Count` counts names in the list; `.Length` measures each string.
+
+Starting with `string.Empty` gives the comparison an initial length of zero. If the dictionary is empty, the loop never runs and the method returns `string.Empty`. Using `>` keeps the first encountered name when two names share the greatest length.
+
+### Mistakes and fixes
+
+| Mistake                                                    | Why it fails                                        | Fix                                                        |
+| ---------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------- |
+| `return existingDictionary.Add(countryCode, countryName);` | `Add()` returns no value.                           | Call `Add()`, then return the dictionary.                  |
+| Using `i` before declaring it in the loop                  | The variable is not available outside its scope.    | Access list entries inside the loop where `i` is declared. |
+| `existingDictionary.Values[i]`                             | The value collection does not support indexing.     | Copy the values into a list before using `[i]`.            |
+| Comparing a name's `.Length` with a string variable        | One side is an integer and the other is a string.   | Compare both names' `.Length` values.                      |
+| Assigning through `[]` without checking the key in task 7  | A missing key would be added, contrary to the task. | Guard the assignment with `ContainsKey()`.                 |
