@@ -22,6 +22,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 12  | Dates, times, parsing and formatting     | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
 | 13  | Nullability, ternaries and null checks   | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
 | 14  | Dictionaries, keys and value collections | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
+| 15  | Inheritance, overrides and polymorphism  | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
 
 ## Lucian's Luscious Lasagna
 
@@ -811,3 +812,95 @@ Starting with `string.Empty` gives the comparison an initial length of zero. If 
 | `existingDictionary.Values[i]`                             | The value collection does not support indexing.     | Copy the values into a list before using `[i]`.            |
 | Comparing a name's `.Length` with a string variable        | One side is an integer and the other is a string.   | Compare both names' `.Length` values.                      |
 | Assigning through `[]` without checking the key in task 7  | A missing key would be added, contrary to the task. | Guard the assignment with `ContainsKey()`.                 |
+
+## Wizards and Warriors
+
+### What I learned
+
+- **Inheritance** lets child classes share behavior from a parent class. `Warrior : Character` means a warrior is a kind of character.
+- An **abstract class** provides a shared foundation but cannot be created directly with `new Character(...)`. An abstract method has no body; a concrete child class must implement it.
+- A **virtual method** supplies behavior that a child can replace using `override`. `Character.Vulnerable()` returns `false`; `Wizard` overrides it, while `Warrior` inherits it unchanged.
+- `base("Wizard")` passes an argument to the parent constructor, which runs before the child constructor's body. A `protected` constructor is available to child classes; a `private` field is accessible only inside its declaring class.
+- **Polymorphism** means the same method call can run different implementations depending on the actual object. A `Character target` can refer to a warrior or wizard, and `target.Vulnerable()` uses that object's implementation.
+
+### Storing the character description
+
+These members belong inside `Character`:
+
+```csharp
+private readonly string characterType;
+
+protected Character(string characterType)
+{
+    this.characterType = characterType;
+}
+
+public override string ToString()
+{
+    return $"Character is a {characterType}";
+}
+```
+
+`this.characterType` identifies the field, while the constructor parameter supplies its starting value. `readonly` allows assignment during initialization or construction and prevents later reassignment.
+
+The child constructors call `base("Warrior")` and `base("Wizard")`. Both classes inherit this `ToString()` implementation, which replaces the method inherited from `object`. String interpolation inserts the stored type into the description.
+
+### Same method name, different damage rules
+
+`Character` declares the shared requirement:
+
+```csharp
+public abstract int DamagePoints(Character target);
+```
+
+Each child supplies its own implementation. Inside `Wizard`:
+
+```csharp
+public override int DamagePoints(Character target)
+{
+    if (spellPrepared)
+    {
+        return 12;
+    }
+
+    return 3;
+}
+```
+
+The wizard checks its own spell state. The `target` parameter stays in the required method signature even though this implementation does not use it. `return` ends the method immediately, so the final `return 3;` runs only when the condition is false.
+
+Inside `Warrior`:
+
+```csharp
+public override int DamagePoints(Character target)
+{
+    if (target.Vulnerable())
+    {
+        return 10;
+    }
+
+    return 6;
+}
+```
+
+The warrior asks the character being attacked whether it is vulnerable. It does not need to check the target's class itself.
+
+### Example to remember
+
+```csharp
+var warrior = new Warrior();
+var wizard = new Wizard();
+
+warrior.ToString();            // "Character is a Warrior"
+wizard.Vulnerable();           // true
+wizard.DamagePoints(warrior);  // 3
+warrior.DamagePoints(wizard);  // 10
+
+wizard.PrepareSpell();
+
+wizard.Vulnerable();           // false
+wizard.DamagePoints(warrior);  // 12
+warrior.DamagePoints(wizard);  // 6
+```
+
+These are the expected results from the completed implementation. Attacking does not reset `spellPrepared`; this exercise does not require consuming the prepared spell.
