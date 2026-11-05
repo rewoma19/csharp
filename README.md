@@ -23,6 +23,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 13  | Nullability, ternaries and null checks   | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
 | 14  | Dictionaries, keys and value collections | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
 | 15  | Inheritance, overrides and polymorphism  | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
+| 16  | Extension methods and string ranges      | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
 
 ## Lucian's Luscious Lasagna
 
@@ -904,3 +905,62 @@ warrior.DamagePoints(wizard);  // 6
 ```
 
 These are the expected results from the completed implementation. Attacking does not reset `spellPrepared`; this exercise does not require consuming the prepared spell.
+
+## Log Analysis
+
+### What I learned
+
+- An **extension method** lets me call a helper as though it belongs to an existing type.
+- In `log.SubstringAfter(": ")`, `log` becomes the `str` parameter and `": "` becomes the delimiter argument. A **delimiter** is text marking a boundary.
+- `IndexOf(delimiter)` returns the delimiter's starting position. Adding `delimiter.Length` moves past the whole delimiter, including delimiters longer than one character.
+- `IndexOf(delimiter, startIndex)` begins searching at `startIndex`. Its result is still a position in the original string, not a count of characters searched.
+- Range syntax, `str[startIndex..endIndex]`, includes the start and excludes the end. It is syntax rather than a string method, and it produces the same text as `str.Substring(startIndex, endIndex - startIndex)`.
+
+Unlike the instance methods from earlier exercises, these helpers do not require creating a `LogAnalysis` object. The `this` modifier keyword that comes before the first parameter enables the string-call syntax:
+
+```csharp
+string log = "[INFO]: File Deleted.";
+
+log.SubstringAfter(": ");              // "File Deleted."
+LogAnalysis.SubstringAfter(log, ": "); // Same call using static method syntax
+```
+
+### Understanding the search start and the range
+
+For `"[INFO]: File Deleted."`:
+
+```text
+Character:  [ I N F O ] :
+Index:      0 1 2 3 4 5 6
+```
+
+The opening delimiter `"["` starts at `0` and has length `1`, so `subStartIndex` is `1`.
+
+```csharp
+int endIndex = str.IndexOf("]", 1);
+```
+
+This means “find `"]"`, starting the search at position `1`.” It returns `5`, the closing bracket's position in the original string. Searching after the opening delimiter selects a closing delimiter that follows it.
+
+### General helpers versus log-specific methods
+
+Tasks 1 and 2 let the caller choose the delimiters. Tasks 3 and 4 know the log format and supply the delimiters themselves, reusing the helpers. These methods belong inside the same `LogAnalysis` class:
+
+```csharp
+public static string Message(this string str)
+{
+    return str.SubstringAfter(": ");
+}
+
+public static string LogLevel(this string str)
+{
+    return str.SubstringBetween("[", "]");
+}
+```
+
+| General helper call              | Log-specific call | Result for `"[INFO]: File Deleted."` |
+| -------------------------------- | ----------------- | ------------------------------------ |
+| `log.SubstringAfter(": ")`       | `log.Message()`   | `"File Deleted."`                    |
+| `log.SubstringBetween("[", "]")` | `log.LogLevel()`  | `"INFO"`                             |
+
+This builds on calling one method from another in earlier exercises. The caller can ask for a message or level without needing to know the delimiters.
