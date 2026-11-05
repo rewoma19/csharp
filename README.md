@@ -6,24 +6,25 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 <!-- Keep this table in the order: #, Topic, Exercise, Solution, Learning notes. Number entries sequentially from 1 and continue this format when adding exercises. -->
 
-| #   | Topic                                    | Exercise                          | Solution                                                                                    | Learning notes                              |
-| --- | ---------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| 1   | Basics                                   | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
-| 2   | Booleans and static methods              | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
-| 3   | Numbers, conditions and conversions      | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
-| 4   | Strings and text processing              | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
-| 5   | Classes, objects and instance fields     | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
-| 6   | Arrays, constructors and loops           | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
-| 7   | Decimals, interest and while loops       | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
-| 8   | Characters, Unicode and text cleanup     | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
-| 9   | Generic lists and duplicate checks       | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
-| 10  | Constructors and object interaction      | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
-| 11  | Randomness and shared instance fields    | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
-| 12  | Dates, times, parsing and formatting     | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
-| 13  | Nullability, ternaries and null checks   | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
-| 14  | Dictionaries, keys and value collections | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
-| 15  | Inheritance, overrides and polymorphism  | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
-| 16  | Extension methods and string ranges      | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
+| #   | Topic                                     | Exercise                          | Solution                                                                                    | Learning notes                              |
+| --- | ----------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| 1   | Basics                                    | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
+| 2   | Booleans and static methods               | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
+| 3   | Numbers, conditions and conversions       | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
+| 4   | Strings and text processing               | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
+| 5   | Classes, objects and instance fields      | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
+| 6   | Arrays, constructors and loops            | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
+| 7   | Decimals, interest and while loops        | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
+| 8   | Characters, Unicode and text cleanup      | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
+| 9   | Generic lists and duplicate checks        | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
+| 10  | Constructors and object interaction       | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
+| 11  | Randomness and shared instance fields     | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
+| 12  | Dates, times, parsing and formatting      | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
+| 13  | Nullability, ternaries and null checks    | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
+| 14  | Dictionaries, keys and value collections  | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
+| 15  | Inheritance, overrides and polymorphism   | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
+| 16  | Extension methods and string ranges       | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
+| 17  | Tuples, local variables and string ranges | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
 
 ## Lucian's Luscious Lasagna
 
@@ -964,3 +965,43 @@ public static string LogLevel(this string str)
 | `log.SubstringBetween("[", "]")` | `log.LogLevel()`  | `"INFO"`                             |
 
 This builds on calling one method from another in earlier exercises. The caller can ask for a message or level without needing to know the delimiters.
+
+## Phone Number Analysis
+
+### What I learned
+
+- A **tuple** groups several values into one value.
+- Names in a tuple return type describe the returned fields; they do not declare local variables inside the method. Local variables need their own declarations.
+- `var` lets the compiler infer a local variable's type from its starting value. A comparison using `==` produces a `bool`; taking a slice of a string produces a `string`.
+- Values in `return (IsNewYork, IsFake, LocalNumber);` fill the returned tuple by position. Local variable names do not have to match the tuple field names.
+- Dot syntax reads a named tuple field: `phoneNumberInfo.IsFake` retrieves the Boolean already calculated by `Analyze`.
+
+### Why local variables still need declarations
+
+The return type `(bool IsNewYork, bool IsFake, string LocalNumber)` tells the caller what data it will receive. It does not create variables for the method's calculations.
+
+Inside the method, either of these declarations creates a Boolean local variable (use one, not both):
+
+```csharp
+bool isNewYork = phoneNumber[0..3] == "212";
+// Or let C# infer the same bool type:
+var isNewYork = phoneNumber[0..3] == "212";
+```
+
+This is **type inference**: C# figures out the type from the expression on the right. The variable still has a fixed type. In contrast, `isNewYork = ...;` without `bool` or `var` assigns to an existing variable; it does not declare one.
+
+My solution uses matching names for local variables and tuple fields, but they are separate declarations. Using `isNewYork`, `isFake`, and `localNumber` as local names and returning them in that order would still give callers the fields `IsNewYork`, `IsFake`, and `LocalNumber`.
+
+### String ranges and counting from the end
+
+This builds on ranges: indexes start at `0`, and a range includes its starting index but excludes its ending index.
+
+For `"212-555-1234"`:
+
+| Expression          | Selected positions   | Result   |
+| ------------------- | -------------------- | -------- |
+| `phoneNumber[0..3]` | Indexes 0, 1, and 2  | `"212"`  |
+| `phoneNumber[4..7]` | Indexes 4, 5, and 6  | `"555"`  |
+| `phoneNumber[^4..]` | Last four characters | `"1234"` |
+
+`^4` means four positions from the end. Leaving the end of the range blank means continue to the end of the string.
