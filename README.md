@@ -25,6 +25,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 15  | Inheritance, overrides and polymorphism   | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
 | 16  | Extension methods and string ranges       | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
 | 17  | Tuples, local variables and string ranges | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
+| 18  | Switches, type patterns and guards        | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
 
 ## Lucian's Luscious Lasagna
 
@@ -1005,3 +1006,60 @@ For `"212-555-1234"`:
 | `phoneNumber[^4..]` | Last four characters | `"1234"` |
 
 `^4` means four positions from the end. Leaving the end of the range blank means continue to the end of the string.
+
+## Football Match Reports
+
+### What I learned
+
+- A `switch` chooses a branch based on a value or its type.
+- Several empty case labels can share one body.
+- `break` exits the switch so execution continues after it. `return` exits the entire method. An assignment alone does not end a case.
+- `default` handles inputs that match no case. Assigning a result in every branch ensures my local variable has a value before I return it.
+- **Type pattern matching** checks an object's type and gives me a variable of that type. A `when` condition, called a **guard**, narrows when a case matches.
+
+### Getting a type versus matching a type
+
+`GetType()` returns an object's runtime type: the type of the value it actually contains.
+
+```csharp
+object report = 5000;
+Console.WriteLine(report.GetType()); // System.Int32
+```
+
+### Where Incident comes from
+
+Exercism supplies `Incident`, `Foul`, `Injury`, and `Manager` in [OffFieldActivitiesAndCharacters.cs](./Switches/football-match-reports/OffFieldActivitiesAndCharacters.cs). This project automatically includes its `.cs` files when compiling. Both files use the global namespace, so I can refer to those classes directly without importing the file.
+
+A normal `using SomeNamespace;` directive lets me use types in that namespace by their short names. It does not import a source file.
+
+### Specific types before general types
+
+This builds on inheritance. `Injury : Incident` and `Foul : Incident` mean both types are kinds of incident.
+
+```csharp
+case Injury injury:
+    description = $"Oh no! {injury.GetDescription()} Medics are on the field.";
+    break;
+case Incident incident:
+    description = incident.GetDescription();
+    break;
+```
+
+An injury matches both types, so I put `Injury` first to give it the special message. Putting `Incident` first would make the `Injury` case unreachable, causing a compiler error.
+
+A foul uses the `Incident` case. Because `GetDescription()` is `virtual` and `Foul` overrides it, the call returns `"The referee deemed a foul."` automatically. I do not need a separate foul case.
+
+### Using a guard instead of an if inside a case
+
+```csharp
+case Manager manager when manager.Club is null:
+    description = manager.Name;
+    break;
+case Manager manager:
+    description = $"{manager.Name} ({manager.Club})";
+    break;
+```
+
+The first case requires both a `Manager` object and a missing club. The second handles the remaining managers. The guarded case must come first because the general case matches every manager.
+
+For `new Manager("José Mourinho", null)`, the expected output is `"José Mourinho"`. For `new Manager("Jürgen Klopp", "Liverpool")`, it is `"Jürgen Klopp (Liverpool)"`.
