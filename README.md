@@ -28,6 +28,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 18  | Switches, type patterns and guards         | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
 | 19  | Enums, parsing and numeric casts           | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
 | 20  | Exceptions, switch guards and return types | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
+| 21  | Casting, type patterns and exact types     | Secure Munchester United          | [Code](./Casting/secure-munchester-united/SecureMunchesterUnited.cs)                        | [Notes](#secure-munchester-united)          |
 
 ## Lucian's Luscious Lasagna
 
@@ -1202,3 +1203,34 @@ Successful calculations reach the final interpolation:
 return $"{operand1} {operation} {operand2} = {result}";
 // Calculate(16, 51, "+") returns "16 + 51 = 67".
 ```
+
+## Secure Munchester United
+
+### What I learned
+
+- **Type pattern matching** checks whether an object can be treated as a type and gives me a variable of that type: `support is Staff member`.
+- In `Staff member`, `Staff` is the type and `member` is a variable name. `Staff staff` also works: C# distinguishes uppercase and lowercase names. Neither form creates a new object.
+- `is Staff` includes classes that inherit from `Staff`, directly or indirectly. I check specific types before general types when they need special behavior.
+- `GetType()` returns an object's actual runtime type. Comparing it with `typeof(Security)` checks for exactly `Security`, excluding its subclasses.
+- `string.Empty` represents the same empty string as `""`. It adds no characters during interpolation, but cannot remove spaces already written outside the expression.
+
+`TeamSupport` is an **interface**: it requires implementing types to provide a readable `Title` property. `Staff` implements that interface and is abstract, so I cannot create `new Staff()`. Concrete child classes supply their titles. `Manager` and `Chairman` implement `TeamSupport` directly; they do not inherit from `Staff`.
+
+This builds on inheritance.
+
+### Broad checks versus exact types
+
+`Security : Staff` and `SecurityJunior : Security` mean a security junior is both a security member and a staff member.
+
+| Object                 | `is Staff` | `is Security` | `GetType() == typeof(Security)` |
+| ---------------------- | ---------- | ------------- | ------------------------------- |
+| `new Physio()`         | `true`     | `false`       | `false`                         |
+| `new Security()`       | `true`     | `true`        | `true`                          |
+| `new SecurityJunior()` | `true`     | `true`        | `false`                         |
+| `new Manager()`        | `false`    | `false`       | `false`                         |
+
+Task 1 returns staff titles. Task 2 adds the priority suffix to `Security` and its subclasses. Task 3 changes that rule: only an object whose exact type is `Security` receives the suffix.
+
+Checking `Staff` first would return a security member's title immediately and end the method before the security branch could run.
+
+The exercise guarantees non-null input, so no null check is needed before `GetType()`.
