@@ -26,6 +26,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 16  | Extension methods and string ranges       | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
 | 17  | Tuples, local variables and string ranges | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
 | 18  | Switches, type patterns and guards        | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
+| 19  | Enums, parsing and numeric casts          | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
 
 ## Lucian's Luscious Lasagna
 
@@ -1063,3 +1064,59 @@ case Manager manager:
 The first case requires both a `Manager` object and a missing club. The second handles the remaining managers. The guarded case must come first because the general case matches every manager.
 
 For `new Manager("José Mourinho", null)`, the expected output is `"José Mourinho"`. For `new Manager("Jürgen Klopp", "Liverpool")`, it is `"Jürgen Klopp (Liverpool)"`.
+
+## Logs, Logs, Logs!
+
+### What I learned
+
+- An **enum** defines named constants for a related set of choices.
+- Without explicit assignments, enum values start at `0` and increase by one.
+- `Substring(1, 3)` starts at index `1` and takes three characters. For `"[INF]: File deleted"`, it extracts `"INF"`.
+- A `switch` maps each text code to an enum value. Each `return` exits the method, so these cases do not need `break`.
+- Casting with `(int)logLevel` retrieves the enum's underlying integer for the short log format.
+
+### Names and numbers
+
+My enum assigns the required numbers explicitly:
+
+```csharp
+enum LogLevel
+{
+    Trace = 1,
+    Debug = 2,
+    Info = 4,
+    Warning = 5,
+    Error = 6,
+    Fatal = 42,
+    Unknown = 0,
+}
+```
+
+The name makes the code readable; the number supplies the encoded level. `Unknown` has value `0` even though it appears last, because I assigned it explicitly.
+
+### Understanding global::
+
+Autocomplete suggested `global::LogLevel.Trace`. A **namespace** groups names in code; `global::` tells C# to begin looking in the outermost, global namespace.
+
+My enum is declared outside any named namespace. In this exercise, `LogLevel.Trace` and `global::LogLevel.Trace` refer to the same value. The longer spelling can avoid confusion when another name would otherwise hide the enum.
+
+### Mistake and fix
+
+I originally used:
+
+```csharp
+return $"{logLevel}:{message}";
+```
+
+For `LogLevel.Error`, interpolation inserts the name `"Error"`, producing `"Error:Stack overflow"`. Assigning `Error = 6` does not make interpolation automatically use that number.
+
+The corrected method casts before inserting the value:
+
+```csharp
+public static string OutputForShortLog(LogLevel logLevel, string message)
+{
+    return $"{(int)logLevel}:{message}";
+}
+```
+
+`LogLine.OutputForShortLog(LogLevel.Error, "Stack overflow")` now produces `"6:Stack overflow"`.
