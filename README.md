@@ -6,27 +6,28 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 <!-- Keep this table in the order: #, Topic, Exercise, Solution, Learning notes. Number entries sequentially from 1 and continue this format when adding exercises. -->
 
-| #   | Topic                                     | Exercise                          | Solution                                                                                    | Learning notes                              |
-| --- | ----------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| 1   | Basics                                    | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
-| 2   | Booleans and static methods               | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
-| 3   | Numbers, conditions and conversions       | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
-| 4   | Strings and text processing               | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
-| 5   | Classes, objects and instance fields      | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
-| 6   | Arrays, constructors and loops            | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
-| 7   | Decimals, interest and while loops        | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
-| 8   | Characters, Unicode and text cleanup      | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
-| 9   | Generic lists and duplicate checks        | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
-| 10  | Constructors and object interaction       | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
-| 11  | Randomness and shared instance fields     | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
-| 12  | Dates, times, parsing and formatting      | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
-| 13  | Nullability, ternaries and null checks    | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
-| 14  | Dictionaries, keys and value collections  | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
-| 15  | Inheritance, overrides and polymorphism   | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
-| 16  | Extension methods and string ranges       | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
-| 17  | Tuples, local variables and string ranges | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
-| 18  | Switches, type patterns and guards        | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
-| 19  | Enums, parsing and numeric casts          | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
+| #   | Topic                                      | Exercise                          | Solution                                                                                    | Learning notes                              |
+| --- | ------------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| 1   | Basics                                     | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
+| 2   | Booleans and static methods                | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
+| 3   | Numbers, conditions and conversions        | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
+| 4   | Strings and text processing                | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
+| 5   | Classes, objects and instance fields       | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
+| 6   | Arrays, constructors and loops             | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
+| 7   | Decimals, interest and while loops         | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
+| 8   | Characters, Unicode and text cleanup       | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
+| 9   | Generic lists and duplicate checks         | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
+| 10  | Constructors and object interaction        | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
+| 11  | Randomness and shared instance fields      | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
+| 12  | Dates, times, parsing and formatting       | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
+| 13  | Nullability, ternaries and null checks     | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
+| 14  | Dictionaries, keys and value collections   | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
+| 15  | Inheritance, overrides and polymorphism    | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
+| 16  | Extension methods and string ranges        | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
+| 17  | Tuples, local variables and string ranges  | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
+| 18  | Switches, type patterns and guards         | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
+| 19  | Enums, parsing and numeric casts           | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
+| 20  | Exceptions, switch guards and return types | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
 
 ## Lucian's Luscious Lasagna
 
@@ -1120,3 +1121,84 @@ public static string OutputForShortLog(LogLevel logLevel, string message)
 ```
 
 `LogLine.OutputForShortLog(LogLevel.Error, "Stack overflow")` now produces `"6:Stack overflow"`.
+
+## Calculator Conundrum
+
+### What I learned
+
+- An **exception** signals an error. `throw` stops the normal execution path and lets an exception handler deal with the error; without a matching handler, it remains unhandled.
+- `nameof(operation)` produces the string `"operation"`, regardless of the parameter's current value.
+- A `when` condition adds a **guard** to a switch case. `operand2 is 0` matches the constant zero; here, `operand2 == 0` also works.
+- `break` exits the switch, `return` exits the method with a value, and `throw` transfers control through exception handling. A `break` immediately after `return` or `throw` is unreachable.
+
+### Where SimpleOperation comes from
+
+Exercism supplies [SimpleOperation.cs](./Exceptions/calculator-conundrum/SimpleOperation.cs) in the same project. Its `Addition`, `Multiplication`, and `Division` methods are static, so I call them through the class without creating an object.
+
+These alternatives calculate the same answer:
+
+```csharp
+int throughHelper = SimpleOperation.Addition(16, 51); // 67
+int throughOperator = 16 + 51;                       // 67
+```
+
+The helper uses `+` internally. Reusing the supplied methods follows the exercise setup and lets me focus on error handling. As with the supplied classes in Football Match Reports, I do not need to import the source file.
+
+### Understanding nameof and exception arguments
+
+```csharp
+string operation = "+";
+
+Console.WriteLine(operation);         // +
+Console.WriteLine(nameof(operation)); // operation
+
+throw new ArgumentOutOfRangeException(nameof(operation));
+```
+
+The exception above records `"operation"` as the invalid parameter's name. `nameof` lets the compiler check that the name exists and lets editor rename tools update the reference.
+
+Constructor arguments depend on the exception type. In my solution, `new ArgumentException(nameof(operation))` uses `"operation"` as the error **message**, not the parameter name. To provide both, I could write:
+
+```csharp
+throw new ArgumentException("Operation cannot be empty.", nameof(operation));
+```
+
+`new ArgumentNullException()` is valid; `new ArgumentNullException(nameof(operation))` would also identify the parameter.
+
+| Input                                | Required behavior                            |
+| ------------------------------------ | -------------------------------------------- |
+| `""`                                 | Throw `ArgumentException`.                   |
+| `null`                               | Throw `ArgumentNullException`.               |
+| An unsupported symbol, such as `"-"` | Throw `ArgumentOutOfRangeException`.         |
+| `"/"` with a zero divisor            | Return `"Division by zero is not allowed."`. |
+
+### Using a guard instead of a nested if
+
+This builds on the guarded `Manager` case in Football Match Reports:
+
+```csharp
+case "/" when operand2 is 0:
+    return "Division by zero is not allowed.";
+case "/":
+    result = SimpleOperation.Division(operand1, operand2);
+    break;
+```
+
+The specific case comes first. It returns the message immediately, so neither division nor the final formatted return runs for a zero divisor. The general case handles the remaining divisions.
+
+My solution prevents division by zero with a guard; it does not catch a `DivideByZeroException`. Throwing an exception and catching one with `try`/`catch` are separate operations.
+
+### Mistakes and fixes
+
+| Mistake                                 | Cause                                    | Fix                               |
+| --------------------------------------- | ---------------------------------------- | --------------------------------- |
+| Assigning the error message to `result` | An `int` cannot store a string.          | Return the message directly.      |
+| Using a bare `return;`                  | `Calculate` promises to return a string. | Supply the string after `return`. |
+| Adding `break` after `throw`            | Execution cannot reach that statement.   | Remove the unnecessary `break`.   |
+
+Successful calculations reach the final interpolation:
+
+```csharp
+return $"{operand1} {operation} {operand2} = {result}";
+// Calculate(16, 51, "+") returns "16 + 51 = 67".
+```
