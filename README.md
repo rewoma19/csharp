@@ -29,6 +29,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 19  | Enums, parsing and numeric casts           | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
 | 20  | Exceptions, switch guards and return types | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
 | 21  | Casting, type patterns and exact types     | Secure Munchester United          | [Code](./Casting/secure-munchester-united/SecureMunchesterUnited.cs)                        | [Notes](#secure-munchester-united)          |
+| 22  | Properties, accessors and validation       | Weighing Machine                  | [Code](./Properties/weighing-machine/WeighingMachine.cs)                                    | [Notes](#weighing-machine)                  |
 
 ## Lucian's Luscious Lasagna
 
@@ -1234,3 +1235,119 @@ Task 1 returns staff titles. Task 2 adds the priority suffix to `Security` and i
 Checking `Staff` first would return a security member's title immediately and end the method before the security branch could run.
 
 The exercise guarantees non-null input, so no null check is needed before `GetType()`.
+
+## Weighing Machine
+
+### What I learned
+
+- A **field** stores data inside an object. A **property** provides access to data and can run code when it is read or changed. `weight` and `Weight` are different names because C# is case-sensitive.
+- `get` runs when I read a property. `set` runs when I assign to it. These blocks are called **accessors**; C# calls the appropriate one automatically.
+- Inside a setter, `value` is the incoming value. In `wm.Weight = 60.5;`, the setter receives `60.5` as `value`.
+- An **auto-implemented property**, such as `{ get; set; }`, lets C# create hidden storage. A custom getter must explicitly return the field or calculation I want to read.
+- A property can be get-only. `Precision` keeps its initial value; `DisplayWeight` calculates a result each time I read it.
+
+### Reading and writing a property
+
+```csharp
+var wm = new WeighingMachine(precision: 3);
+wm.Weight = 60.5;                 // Runs Weight's set accessor.
+double currentWeight = wm.Weight; // Runs Weight's get accessor.
+```
+
+My `Weight` property uses a **backing field**: a field that holds the property's data.
+
+```csharp
+private double weight;
+
+public double Weight
+{
+    get
+    {
+        return weight;
+    }
+    set
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+        weight = value;
+    }
+}
+```
+
+The setter checks the incoming number before storing it. The getter returns the stored number. If the weight is `70` and an assignment of `-5` throws, the assignment never reaches `weight = value;`, so the stored weight remains `70`.
+
+### Replacing an if with ThrowIfNegative
+
+I replaced this explicit check:
+
+```csharp
+if (value < 0)
+{
+    throw new ArgumentOutOfRangeException(nameof(Weight));
+}
+```
+
+with:
+
+```csharp
+ArgumentOutOfRangeException.ThrowIfNegative(value);
+```
+
+The helper throws for a negative incoming value and returns normally otherwise. Zero is allowed. This builds on exceptions: throwing stops the normal execution path, so the later assignment does not run.
+
+The exception details differ slightly. The helper call above automatically records `"value"` as the parameter name; the original check records `"Weight"`. To explicitly use the property name, I can write:
+
+```csharp
+ArgumentOutOfRangeException.ThrowIfNegative(value, nameof(Weight));
+```
+
+### Initial values and later assignments
+
+My class uses a **primary constructor**: its parameter list appears directly after the class name. This shortened example shows how it initializes the get-only precision property:
+
+```csharp
+class WeighingMachine(int precision)
+{
+    public int Precision { get; } = precision;
+    public double TareAdjustment { get; set; } = 5.0;
+}
+```
+
+`new WeighingMachine(precision: 3)` initializes `Precision` to `3`. Callers can read it but cannot assign a new value to it. With a conventional constructor, I could instead assign `Precision = precision;` inside the constructor body.
+
+`TareAdjustment` starts at `5.0`, then accepts later assignments such as `wm.TareAdjustment = 10;`. The initializer establishes the default; the setter accepts each new value. It also allows negative adjustments. I use `double`, matching the exercise's decimal literals and the `Weight` property.
+
+### Calculating the display in get
+
+```csharp
+public string DisplayWeight
+{
+    get
+    {
+        double adjustedWeight = Weight - TareAdjustment;
+        string formattedWeight = adjustedWeight.ToString($"F{Precision}");
+        return $"{formattedWeight} kg";
+    }
+}
+```
+
+Reading `wm.DisplayWeight` runs this calculation using the current weight and tare adjustment. No separate display field or setter is needed.
+
+With precision `3`, `$"F{Precision}"` produces `"F3"`. This format displays exactly three decimal places, rounding as needed and keeping trailing zeros. It returns a string without changing the stored weight. For the exercise's formatting culture:
+
+| Weight    | Tare adjustment | Precision | DisplayWeight  |
+| --------- | --------------- | --------- | -------------- |
+| `100.770` | `10`            | `3`       | `"90.770 kg"`  |
+| `100.770` | `10`            | `1`       | `"90.8 kg"`    |
+| `100`     | `110.567`       | `3`       | `"-10.567 kg"` |
+
+A negative input weight is rejected, but a negative display weight is allowed when the tare adjustment is larger than the input weight.
+
+### Mistakes and fixes
+
+| Mistake                                                                    | Cause                                                                                                    | Fix                                                                                         |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Declaring `Precision` without initializing it from a constructor parameter | The property does not receive the requested precision.                                                   | Initialize it from `precision`.                                                             |
+| Setting `tareAdjustment = 5.0;` inside the setter                          | Each assignment ignores the incoming `value`; this also does not establish a default at object creation. | Use `public double TareAdjustment { get; set; } = 5.0;`.                                    |
+| Using a bare `get;` beside a setter that writes a separately named field   | The getter does not automatically read that field.                                                       | Use an auto-property for simple storage, or explicitly return the field in a custom getter. |
+| Calculating `DisplayWeight` inside `set`                                   | Reading the property runs `get`, so the calculation does not run.                                        | Calculate and return the formatted result inside `get`.                                     |
+| Ending a property block with `};`                                          | A property block without an initializer does not take a trailing semicolon.                              | End it with `}`; an initializer such as `= 5.0;` does need its semicolon.                   |
