@@ -6,30 +6,31 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 <!-- Keep this table in the order: #, Topic, Exercise, Solution, Learning notes. Number entries sequentially from 1 and continue this format when adding exercises. -->
 
-| #   | Topic                                      | Exercise                          | Solution                                                                                    | Learning notes                              |
-| --- | ------------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| 1   | Basics                                     | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
-| 2   | Booleans and static methods                | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
-| 3   | Numbers, conditions and conversions        | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
-| 4   | Strings and text processing                | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
-| 5   | Classes, objects and instance fields       | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
-| 6   | Arrays, constructors and loops             | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
-| 7   | Decimals, interest and while loops         | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
-| 8   | Characters, Unicode and text cleanup       | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
-| 9   | Generic lists and duplicate checks         | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
-| 10  | Constructors and object interaction        | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
-| 11  | Randomness and shared instance fields      | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
-| 12  | Dates, times, parsing and formatting       | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
-| 13  | Nullability, ternaries and null checks     | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
-| 14  | Dictionaries, keys and value collections   | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
-| 15  | Inheritance, overrides and polymorphism    | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
-| 16  | Extension methods and string ranges        | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
-| 17  | Tuples, local variables and string ranges  | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
-| 18  | Switches, type patterns and guards         | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
-| 19  | Enums, parsing and numeric casts           | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
-| 20  | Exceptions, switch guards and return types | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
-| 21  | Casting, type patterns and exact types     | Secure Munchester United          | [Code](./Casting/secure-munchester-united/SecureMunchesterUnited.cs)                        | [Notes](#secure-munchester-united)          |
-| 22  | Properties, accessors and validation       | Weighing Machine                  | [Code](./Properties/weighing-machine/WeighingMachine.cs)                                    | [Notes](#weighing-machine)                  |
+| #   | Topic                                              | Exercise                          | Solution                                                                                    | Learning notes                              |
+| --- | -------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| 1   | Basics                                             | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
+| 2   | Booleans and static methods                        | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
+| 3   | Numbers, conditions and conversions                | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
+| 4   | Strings and text processing                        | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
+| 5   | Classes, objects and instance fields               | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
+| 6   | Arrays, constructors and loops                     | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
+| 7   | Decimals, interest and while loops                 | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
+| 8   | Characters, Unicode and text cleanup               | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
+| 9   | Generic lists and duplicate checks                 | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
+| 10  | Constructors and object interaction                | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
+| 11  | Randomness and shared instance fields              | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
+| 12  | Dates, times, parsing and formatting               | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
+| 13  | Nullability, ternaries and null checks             | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
+| 14  | Dictionaries, keys and value collections           | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
+| 15  | Inheritance, overrides and polymorphism            | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
+| 16  | Extension methods and string ranges                | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
+| 17  | Tuples, local variables and string ranges          | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
+| 18  | Switches, type patterns and guards                 | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
+| 19  | Enums, parsing and numeric casts                   | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
+| 20  | Exceptions, switch guards and return types         | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
+| 21  | Casting, type patterns and exact types             | Secure Munchester United          | [Code](./Casting/secure-munchester-united/SecureMunchesterUnited.cs)                        | [Notes](#secure-munchester-united)          |
+| 22  | Properties, accessors and validation               | Weighing Machine                  | [Code](./Properties/weighing-machine/WeighingMachine.cs)                                    | [Notes](#weighing-machine)                  |
+| 23  | Expression bodies, switch expressions and readonly | The Weather in Deather            | [Code](./Expressions/the-weather-in-deather/TheWeatherInDeather.cs)                         | [Notes](#the-weather-in-deather)            |
 
 ## Lucian's Luscious Lasagna
 
@@ -1351,3 +1352,129 @@ A negative input weight is rejected, but a negative display weight is allowed wh
 | Using a bare `get;` beside a setter that writes a separately named field   | The getter does not automatically read that field.                                                       | Use an auto-property for simple storage, or explicitly return the field in a custom getter. |
 | Calculating `DisplayWeight` inside `set`                                   | Reading the property runs `get`, so the calculation does not run.                                        | Calculate and return the formatted result inside `get`.                                     |
 | Ending a property block with `};`                                          | A property block without an initializer does not take a trailing semicolon.                              | End it with `}`; an initializer such as `= 5.0;` does need its semicolon.                   |
+
+## The Weather in Deather
+
+### What I learned
+
+- **Refactoring** changes how code is written while preserving its behavior. Conditions, cutoffs and exceptions must still follow the original rules.
+- An **expression** produces a value. An expression-bodied property or method uses `=>` instead of a block that simply returns an expression.
+- A comparison already produces `true` or `false`. `HasHistory => recordDates.Count > 1` needs no extra `if` or ternary.
+- A **ternary expression** chooses between two results: `condition ? resultIfTrue : resultIfFalse`.
+- A **switch expression** checks its arms in order and produces the result of the first match. A `when` guard adds a condition to an arm.
+
+This builds on the getters in [Weighing Machine](#weighing-machine) and switch guards in [Calculator Conundrum](#calculator-conundrum).
+
+### Expression-bodied properties and methods
+
+These two properties have the same behavior; I use only one version in my class:
+
+```csharp
+// A getter block.
+public decimal LatestTemperature
+{
+    get
+    {
+        return reading.Temperature;
+    }
+}
+
+// The shorter expression-bodied version.
+public decimal LatestTemperature => reading.Temperature;
+```
+
+I read the shorter version as “when LatestTemperature is read, return reading.Temperature.” It evaluates the expression each time I read the property, so it uses the current reading. There is no setter.
+
+Methods keep parentheses; properties do not:
+
+```csharp
+public bool HasHistory => recordDates.Count > 1;
+
+public State RunSelfTest() =>
+    reading.Equals(new Reading()) ? State.Bad : State.Good;
+```
+
+I access these as `station.HasHistory` and `station.RunSelfTest()`. The self-test returns `Bad` when the reading equals a default `Reading`, and `Good` otherwise. A default `Reading` has zero numeric values and the `Unknown` wind direction.
+
+`AcceptReading` and `ClearAll` keep their blocks because each performs several actions. Shorter syntax is useful when it keeps the code easy to follow.
+
+### Switch expressions for outlooks
+
+A switch statement uses `case` labels and statements such as `return`. A switch expression uses arms such as `pattern => result` to produce a value. I chose switch expressions instead of nested ternaries for the outlook properties.
+
+```csharp
+public Outlook ShortTermOutlook => reading switch
+{
+    _ when reading.Equals(new Reading()) => throw new ArgumentException(),
+    _ when reading.Pressure < 10 && reading.Temperature < 30 => Outlook.Cool,
+    _ when reading.Temperature > 50 => Outlook.Good,
+    _ => Outlook.Warm
+};
+```
+
+The first `=>` introduces the property's expression body. Each `=>` inside the braces connects a switch arm to its result. Arms are separated by commas, and the property ends with a semicolon.
+
+`_` matches any value. With `when`, the condition must also be true. The final `_` has no guard, so it handles anything left over. A `throw` expression raises an exception instead of producing an outlook.
+
+```csharp
+public Outlook LongTermOutlook => reading.WindDirection switch
+{
+    WindDirection.Southerly => Outlook.Good,
+    WindDirection.Easterly when reading.Temperature > 20m => Outlook.Good,
+    WindDirection.Easterly => Outlook.Warm,
+    WindDirection.Northerly => Outlook.Cool,
+    WindDirection.Westerly => Outlook.Rainy,
+    _ => throw new ArgumentException()
+};
+```
+
+The guarded easterly arm comes before the general easterly arm. If the wind is easterly and the temperature is above `20`, the first one returns `Good`. The second catches all remaining easterly readings, including exactly `20`, and returns `Warm`. Southerly wind returns `Good` at every temperature.
+
+### The m suffix on numbers
+
+`m` identifies a `decimal` literal; it is not a measurement unit:
+
+```csharp
+50     // int
+50.0   // double
+50m    // decimal
+50.5m  // decimal with a fractional part
+```
+
+`Temperature` is a `decimal`. Comparing it with `50` works because C# converts the integer to a decimal. Writing `50m` makes the type explicit. Comparing it with `50.5` does not compile because C# does not implicitly mix `decimal` and `double`; I use `50.5m` instead.
+
+### readonly fields and changing list contents
+
+```csharp
+private readonly List<DateTime> recordDates = [];
+private readonly List<decimal> temperatures = [];
+```
+
+A `readonly` instance field can be assigned at its declaration or in an instance constructor. For these lists, it prevents replacing the list later; it does not freeze its contents.
+
+Inside a regular method:
+
+```csharp
+recordDates.Add(DateTime.Now); // Allowed: changes the contents.
+recordDates.Clear();           // Allowed: empties the same list.
+// recordDates = [];           // Not allowed: replaces the list reference.
+```
+
+The `reading` field stays writable because `AcceptReading` and `ClearAll` assign it new values. A readonly field and a get-only property are different features, even though both restrict certain assignments.
+
+### Understanding editor suggestions
+
+A **namespace** groups type names and helps prevent naming conflicts. For example, `namespace WeatherApp;` would put the following types in that namespace, giving the class the full name `WeatherApp.WeatherStation`.
+
+This exercise's solution and tests use the global namespace. I leave that arrangement unchanged; adding a namespace only to the solution would stop the supplied unqualified test references from finding its types.
+
+A **primary constructor** puts parameters after the type name and lets member initializers use them. As with the earlier Weighing Machine example, a shortened illustration is:
+
+```csharp
+public struct TemperatureReading(decimal temperature)
+{
+    public decimal Temperature { get; } = temperature;
+}
+```
+
+This is an illustration, not a replacement for the supplied `Reading`. The exercise explicitly says not to modify that struct or its enums. Editor recommendations are optional and must fit the exercise instructions.
