@@ -6,31 +6,32 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 <!-- Keep this table in the order: #, Topic, Exercise, Solution, Learning notes. Number entries sequentially from 1 and continue this format when adding exercises. -->
 
-| #   | Topic                                              | Exercise                          | Solution                                                                                    | Learning notes                              |
-| --- | -------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| 1   | Basics                                             | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
-| 2   | Booleans and static methods                        | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
-| 3   | Numbers, conditions and conversions                | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
-| 4   | Strings and text processing                        | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
-| 5   | Classes, objects and instance fields               | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
-| 6   | Arrays, constructors and loops                     | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
-| 7   | Decimals, interest and while loops                 | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
-| 8   | Characters, Unicode and text cleanup               | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
-| 9   | Generic lists and duplicate checks                 | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
-| 10  | Constructors and object interaction                | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
-| 11  | Randomness and shared instance fields              | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
-| 12  | Dates, times, parsing and formatting               | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
-| 13  | Nullability, ternaries and null checks             | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
-| 14  | Dictionaries, keys and value collections           | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
-| 15  | Inheritance, overrides and polymorphism            | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
-| 16  | Extension methods and string ranges                | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
-| 17  | Tuples, local variables and string ranges          | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
-| 18  | Switches, type patterns and guards                 | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
-| 19  | Enums, parsing and numeric casts                   | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
-| 20  | Exceptions, switch guards and return types         | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
-| 21  | Casting, type patterns and exact types             | Secure Munchester United          | [Code](./Casting/secure-munchester-united/SecureMunchesterUnited.cs)                        | [Notes](#secure-munchester-united)          |
-| 22  | Properties, accessors and validation               | Weighing Machine                  | [Code](./Properties/weighing-machine/WeighingMachine.cs)                                    | [Notes](#weighing-machine)                  |
-| 23  | Expression bodies, switch expressions and readonly | The Weather in Deather            | [Code](./Expressions/the-weather-in-deather/TheWeatherInDeather.cs)                         | [Notes](#the-weather-in-deather)            |
+| #   | Topic                                               | Exercise                          | Solution                                                                                    | Learning notes                              |
+| --- | --------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| 1   | Basics                                              | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
+| 2   | Booleans and static methods                         | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
+| 3   | Numbers, conditions and conversions                 | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
+| 4   | Strings and text processing                         | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
+| 5   | Classes, objects and instance fields                | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
+| 6   | Arrays, constructors and loops                      | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
+| 7   | Decimals, interest and while loops                  | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
+| 8   | Characters, Unicode and text cleanup                | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
+| 9   | Generic lists and duplicate checks                  | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
+| 10  | Constructors and object interaction                 | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
+| 11  | Randomness and shared instance fields               | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
+| 12  | Dates, times, parsing and formatting                | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
+| 13  | Nullability, ternaries and null checks              | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
+| 14  | Dictionaries, keys and value collections            | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
+| 15  | Inheritance, overrides and polymorphism             | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
+| 16  | Extension methods and string ranges                 | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
+| 17  | Tuples, local variables and string ranges           | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
+| 18  | Switches, type patterns and guards                  | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
+| 19  | Enums, parsing and numeric casts                    | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
+| 20  | Exceptions, switch guards and return types          | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
+| 21  | Casting, type patterns and exact types              | Secure Munchester United          | [Code](./Casting/secure-munchester-united/SecureMunchesterUnited.cs)                        | [Notes](#secure-munchester-united)          |
+| 22  | Properties, accessors and validation                | Weighing Machine                  | [Code](./Properties/weighing-machine/WeighingMachine.cs)                                    | [Notes](#weighing-machine)                  |
+| 23  | Expression bodies, switch expressions and readonly  | The Weather in Deather            | [Code](./Expressions/the-weather-in-deather/TheWeatherInDeather.cs)                         | [Notes](#the-weather-in-deather)            |
+| 24  | Method overloads, reuse and property initialization | Wizards and Warriors 2.0          | [Code](./Classes2/wizards-and-warriors-2/WizardsAndWarriors2.cs)                            | [Notes](#wizards-and-warriors-20)           |
 
 ## Lucian's Luscious Lasagna
 
@@ -1478,3 +1479,69 @@ public struct TemperatureReading(decimal temperature)
 ```
 
 This is an illustration, not a replacement for the supplied `Reading`. The exercise explicitly says not to modify that struct or its enums. Editor recommendations are optional and must fit the exercise instructions.
+
+## Wizards and Warriors 2.0
+
+### What I learned
+
+- **Method overloading** lets methods share a name when their parameter types or number of parameters differ. Changing only the return type is not enough.
+- The compiler selects the overload using the arguments I supply. `Describe(character)` and `Describe(destination)` call different methods.
+- I can reuse methods inside another method instead of repeating their logic. Each description then has one place to maintain.
+- An enum value and a string are different types. I compare `travelMethod` with `TravelMethod.Walking`, then convert it to text when formatting the output.
+- A non-nullable `string` property should have a non-null value when construction finishes. An initializer such as `= string.Empty;` provides one.
+
+This builds on [enums](#logs-logs-logs), [ternary expressions](#the-weather-in-deather), and [property initializers](#weighing-machine).
+
+### Choosing the travel wording
+
+```csharp
+public static string Describe(TravelMethod travelMethod)
+{
+    return $"You're traveling to your destination {(travelMethod == TravelMethod.Walking ? "by" : "on")} {travelMethod.ToString().ToLowerInvariant()}.";
+}
+```
+
+The ternary chooses `"by"` when the value is `TravelMethod.Walking`, and `"on"` otherwise. Its parentheses are needed inside the interpolation so the colon belongs to the ternary rather than a format specifier.
+
+`ToString()` converts the enum value to its name, such as `"Walking"`. `ToLowerInvariant()` returns lowercase text using rules independent of the computer's culture settings. Neither call changes the enum value.
+
+| Travel method            | Required phrase | Why lowercasing alone is insufficient                      |
+| ------------------------ | --------------- | ---------------------------------------------------------- |
+| `TravelMethod.Walking`   | `by walking`    | Lowercasing `on Walking` still leaves the wrong word `on`. |
+| `TravelMethod.Horseback` | `on horseback`  | Lowercasing fixes the name; `on` is already correct.       |
+
+My first comparison, `travelMethod == "walking"`, did not compile because it compared an enum with a string. The correct comparison is `travelMethod == TravelMethod.Walking`.
+
+### Reusing descriptions without repetition
+
+These overloads belong inside `GameMaster`:
+
+```csharp
+public static string Describe(Character character, Destination destination, TravelMethod travelMethod)
+{
+    return $"{Describe(character)} {Describe(travelMethod)} {Describe(destination)}";
+}
+
+public static string Describe(Character character, Destination destination)
+{
+    return Describe(character, destination, TravelMethod.Walking);
+}
+```
+
+The three-parameter overload calls the individual description methods in **character, travel, destination** order. The literal spaces between the interpolated results separate the sentences.
+
+The two-parameter overload supplies walking as the default by calling the three-parameter overload. This is not a call back to itself: the extra argument selects a different overload. I do not need to repeat the sentence-building code.
+
+### Initializing non-nullable properties
+
+```csharp
+// Inside Destination:
+public string Name { get; set; } = string.Empty;
+
+// Inside Character:
+public string Class { get; set; } = string.Empty;
+```
+
+Without these initializers, the properties start as `null` when the objects are created. Assigning a value on a later line does not remove the warning about their state at the end of construction.
+
+`string.Empty` is `""`, an existing string with zero characters; it is different from `null`, which means no string reference. The initializer supplies a starting value, and `set` still allows later assignments. It does not validate that a name is meaningful or nonempty.
