@@ -32,6 +32,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 22  | Properties, accessors and validation                | Weighing Machine                  | [Code](./Properties/weighing-machine/WeighingMachine.cs)                                    | [Notes](#weighing-machine)                  |
 | 23  | Expression bodies, switch expressions and readonly  | The Weather in Deather            | [Code](./Expressions/the-weather-in-deather/TheWeatherInDeather.cs)                         | [Notes](#the-weather-in-deather)            |
 | 24  | Method overloads, reuse and property initialization | Wizards and Warriors 2.0          | [Code](./Classes2/wizards-and-warriors-2/WizardsAndWarriors2.cs)                            | [Notes](#wizards-and-warriors-20)           |
+| 25  | UTC, time zones, daylight saving and cultures       | Beauty Salon Goes Global          | [Code](./Time/beauty-salon-goes-global/BeautySalonGoesGlobal.cs)                            | [Notes](#beauty-salon-goes-global)          |
 
 ## Lucian's Luscious Lasagna
 
@@ -1545,3 +1546,131 @@ public string Class { get; set; } = string.Empty;
 Without these initializers, the properties start as `null` when the objects are created. Assigning a value on a later line does not remove the warning about their state at the end of construction.
 
 `string.Empty` is `""`, an existing string with zero characters; it is different from `null`, which means no string reference. The initializer supplies a starting value, and `set` still allows later assignments. It does not validate that a name is meaningful or nonempty.
+
+## Beauty Salon Goes Global
+
+### What I learned
+
+- **UTC** (Coordinated Universal Time) is a shared reference for time. A salon's local clock time must be interpreted using that salon's time zone before converting it to UTC.
+- `DateTime.ToLocalTime()` uses the computer's time zone. `TimeZoneInfo.ConvertTimeToUtc()` lets me supply a particular salon's time zone.
+- `System.Runtime.InteropServices` contains tools for interacting with the runtime environment and code outside .NET. Here, I use `RuntimeInformation` to detect the operating system.
+- `DateTime` values are immutable: methods such as `AddDays()` and `AddMinutes()` return new values without changing the original. Negative arguments move backward in time.
+- A **culture** defines conventions such as date order. `CultureInfo` controls how date text is interpreted; `TimeZoneInfo` controls time zone conversions.
+
+This builds on [date parsing](#booking-up-for-beauty), [enums](#logs-logs-logs), and [switch and ternary expressions](#the-weather-in-deather).
+
+### 1. Converting UTC to the computer's local time
+
+```csharp
+public static DateTime ShowLocalTime(DateTime dtUtc)
+{
+    return dtUtc.ToLocalTime();
+}
+```
+
+“Local” means the time zone configured on the computer running the code. It does not automatically mean New York or the salon's location. The conversion applies the local time zone's daylight saving rules for the date.
+
+`DateTime.Kind` labels a value as `Utc`, `Local`, or `Unspecified`. The test constructs a date without a kind, so its kind is `Unspecified`; `ToLocalTime()` treats that kind as UTC when converting. The parameter name `dtUtc` describes the intended input but does not set its kind.
+
+### 2. Scheduling a salon appointment in UTC
+
+My `Schedule()` method parses the string, selects the salon's time zone, then converts the time to UTC:
+
+```csharp
+DateTime appointment = DateTime.Parse(
+    appointmentDateDescription, CultureInfo.InvariantCulture);
+
+// After selecting timeZoneId from the location:
+TimeZoneInfo salonTimeZone =
+    TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
+
+return TimeZoneInfo.ConvertTimeToUtc(appointment, salonTimeZone);
+```
+
+`InvariantCulture` supplies consistent parsing rules regardless of the computer's region. It reads this task's numeric dates in month/day/year order. Parsing the supplied text, which has no time zone, leaves the kind `Unspecified`; the conversion then interprets it in `salonTimeZone`.
+
+For example, Paris at **14:45 on July 25, 2019** becomes **12:45 UTC**. I let `TimeZoneInfo` apply the offset for that date rather than subtracting a fixed number of hours myself.
+
+The operating system check needs this import:
+
+```csharp
+using System.Runtime.InteropServices;
+
+// Inside the method:
+bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+```
+
+A **namespace** groups related types. The `using` directive lets me use the short name `RuntimeInformation` instead of its full name. `IsOSPlatform()` checks the operating system running the program; `OSPlatform.Windows` identifies the platform to check.
+
+On my Mac, `isWindows` is `false`. The exercise uses these IDs:
+
+| Salon    | Mac and Linux      | Windows                   |
+| -------- | ------------------ | ------------------------- |
+| New York | `America/New_York` | `Eastern Standard Time`   |
+| London   | `Europe/London`    | `GMT Standard Time`       |
+| Paris    | `Europe/Paris`     | `W. Europe Standard Time` |
+
+```csharp
+string londonId = isWindows ? "GMT Standard Time" : "Europe/London";
+```
+
+The ternary chooses the first value when the condition is true and the second otherwise. My Mac selects `"Europe/London"`. I keep both branches because the exercise requires the solution to work on all three operating systems. `OSPlatform.OSX` is the value used to check specifically for macOS.
+
+### 3. Moving backward to an alert time
+
+```csharp
+return alertLevel switch
+{
+    AlertLevel.Early => appointment.AddDays(-1),
+    AlertLevel.Standard => appointment.AddMinutes(-105),
+    AlertLevel.Late => appointment.AddMinutes(-30),
+    _ => throw new ArgumentOutOfRangeException(nameof(alertLevel))
+};
+```
+
+One hour and 45 minutes equals `105` minutes. Negative arguments subtract time, and C# handles crossing day, month, and year boundaries. I must return or store the result because `appointment` itself does not change.
+
+The final `_` matches any remaining value. Enum variables can contain unnamed numeric values, so this branch rejects an unexpected alert level. `nameof(alertLevel)` supplies the parameter name as text for the exception.
+
+### 4. Comparing daylight saving status
+
+After finding the salon's time zone, I compare two Boolean values:
+
+```csharp
+bool isDayLightSaving = salonTimeZone.IsDaylightSavingTime(dt);
+bool wasDayLightSaving =
+    salonTimeZone.IsDaylightSavingTime(dt.AddDays(-7));
+
+return isDayLightSaving != wasDayLightSaving;
+```
+
+`!=` means “not equal.” A change from `false` to `true` means daylight saving started; a change from `true` to `false` means it ended. Matching values mean the status is the same at both dates. This comparison handles the exercise's seasonal changes without hard-coding transition dates.
+
+For the London test on **April 1, 2019**, the earlier date is **March 25, 2019**. Daylight saving changed from inactive to active, so the result is `true`.
+
+### 5. Parsing the salon's regional date format
+
+My location switch selects `"en-US"` for New York, `"en-GB"` for London, and `"fr-FR"` for Paris. These cultures use month/day/year, day/month/year, and day/month/year respectively for the numeric dates in this exercise.
+
+```csharp
+CultureInfo culture = CultureInfo.GetCultureInfo(cultureName);
+
+bool isValid = DateTime.TryParse(
+    dtStr, culture, DateTimeStyles.None, out DateTime parsedDate);
+
+return isValid ? parsedDate : DateTime.MinValue;
+```
+
+`CultureInfo` and `DateTimeStyles` are available through `using System.Globalization;`.
+
+`TryParse()` returns a Boolean indicating success. The `out DateTime parsedDate` argument also declares a variable where the method stores the parsed value. On failure, that variable receives `DateTime.MinValue`; my ternary explicitly returns the same fallback.
+
+`DateTimeStyles.None` requests no special parsing options. For this task's strings without time zones, the method reads the written date and time without converting them to UTC. `DateTime.MinValue` is **January 1, year 1, at midnight**.
+
+| Input                   | Location | Result                                 |
+| ----------------------- | -------- | -------------------------------------- |
+| `"25/11/2019 13:45:00"` | London   | November 25, 2019 at 13:45             |
+| `"25/11/2019 13:45:00"` | New York | `DateTime.MinValue`: 25 is not a month |
+| `"11/25/2019 13:45:00"` | New York | November 25, 2019 at 13:45             |
+
+I use `Parse()` in `Schedule()` because its date strings are guaranteed valid. I use `TryParse()` here because invalid date text is an expected case and needs a fallback instead of a parsing exception.
