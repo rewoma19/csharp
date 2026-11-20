@@ -6,33 +6,34 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 
 <!-- Keep this table in the order: #, Topic, Exercise, Solution, Learning notes. Number entries sequentially from 1 and continue this format when adding exercises. -->
 
-| #   | Topic                                               | Exercise                          | Solution                                                                                    | Learning notes                              |
-| --- | --------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| 1   | Basics                                              | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
-| 2   | Booleans and static methods                         | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
-| 3   | Numbers, conditions and conversions                 | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
-| 4   | Strings and text processing                         | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
-| 5   | Classes, objects and instance fields                | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
-| 6   | Arrays, constructors and loops                      | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
-| 7   | Decimals, interest and while loops                  | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
-| 8   | Characters, Unicode and text cleanup                | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
-| 9   | Generic lists and duplicate checks                  | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
-| 10  | Constructors and object interaction                 | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
-| 11  | Randomness and shared instance fields               | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
-| 12  | Dates, times, parsing and formatting                | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
-| 13  | Nullability, ternaries and null checks              | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
-| 14  | Dictionaries, keys and value collections            | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
-| 15  | Inheritance, overrides and polymorphism             | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
-| 16  | Extension methods and string ranges                 | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
-| 17  | Tuples, local variables and string ranges           | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
-| 18  | Switches, type patterns and guards                  | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
-| 19  | Enums, parsing and numeric casts                    | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
-| 20  | Exceptions, switch guards and return types          | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
-| 21  | Casting, type patterns and exact types              | Secure Munchester United          | [Code](./Casting/secure-munchester-united/SecureMunchesterUnited.cs)                        | [Notes](#secure-munchester-united)          |
-| 22  | Properties, accessors and validation                | Weighing Machine                  | [Code](./Properties/weighing-machine/WeighingMachine.cs)                                    | [Notes](#weighing-machine)                  |
-| 23  | Expression bodies, switch expressions and readonly  | The Weather in Deather            | [Code](./Expressions/the-weather-in-deather/TheWeatherInDeather.cs)                         | [Notes](#the-weather-in-deather)            |
-| 24  | Method overloads, reuse and property initialization | Wizards and Warriors 2.0          | [Code](./Classes2/wizards-and-warriors-2/WizardsAndWarriors2.cs)                            | [Notes](#wizards-and-warriors-20)           |
-| 25  | UTC, time zones, daylight saving and cultures       | Beauty Salon Goes Global          | [Code](./Time/beauty-salon-goes-global/BeautySalonGoesGlobal.cs)                            | [Notes](#beauty-salon-goes-global)          |
+| #   | Topic                                                  | Exercise                          | Solution                                                                                    | Learning notes                              |
+| --- | ------------------------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| 1   | Basics                                                 | Lucian's Luscious Lasagna         | [Code](./Basics/lucians-luscious-lasagna/LuciansLusciousLasagna.cs)                         | [Notes](#lucians-luscious-lasagna)          |
+| 2   | Booleans and static methods                            | Annalyn's Infiltration            | [Code](./Booleans/annalyns-infiltration/AnnalynsInfiltration.cs)                            | [Notes](#annalyns-infiltration)             |
+| 3   | Numbers, conditions and conversions                    | Cars, Assemble!                   | [Code](./NumbersAndIfs/cars-assemble/CarsAssemble.cs)                                       | [Notes](#cars-assemble)                     |
+| 4   | Strings and text processing                            | Log Levels                        | [Code](./Strings/log-levels/LogLevels.cs)                                                   | [Notes](#log-levels)                        |
+| 5   | Classes, objects and instance fields                   | Jedlik's Toys                     | [Code](./Classes/jedliks-toys/JedliksToys.cs)                                               | [Notes](#jedliks-toys)                      |
+| 6   | Arrays, constructors and loops                         | Bird Watcher                      | [Code](./ArrsAndForLoops/bird-watcher/BirdWatcher.cs)                                       | [Notes](#bird-watcher)                      |
+| 7   | Decimals, interest and while loops                     | Interest is Interesting           | [Code](./WhileLoops/interest-is-interesting/InterestIsInteresting.cs)                       | [Notes](#interest-is-interesting)           |
+| 8   | Characters, Unicode and text cleanup                   | Squeaky Clean                     | [Code](./Chars/squeaky-clean/SqueakyClean.cs)                                               | [Notes](#squeaky-clean)                     |
+| 9   | Generic lists and duplicate checks                     | Tracks on Tracks on Tracks        | [Code](./ListsAndTypes/tracks-on-tracks-on-tracks/TracksOnTracksOnTracks.cs)                | [Notes](#tracks-on-tracks-on-tracks)        |
+| 10  | Constructors and object interaction                    | Need for Speed                    | [Code](./Constructors/need-for-speed/NeedForSpeed.cs)                                       | [Notes](#need-for-speed)                    |
+| 11  | Randomness and shared instance fields                  | Roll the Die!                     | [Code](./Randomness/roll-the-die/RollTheDie.cs)                                             | [Notes](#roll-the-die)                      |
+| 12  | Dates, times, parsing and formatting                   | Booking up for Beauty             | [Code](./Datetimes/booking-up-for-beauty/BookingUpForBeauty.cs)                             | [Notes](#booking-up-for-beauty)             |
+| 13  | Nullability, ternaries and null checks                 | Tim from Marketing                | [Code](./Nullability/tim-from-marketing/TimFromMarketing.cs)                                | [Notes](#tim-from-marketing)                |
+| 14  | Dictionaries, keys and value collections               | International Calling Connoisseur | [Code](./Dictionaries/international-calling-connoisseur/InternationalCallingConnoisseur.cs) | [Notes](#international-calling-connoisseur) |
+| 15  | Inheritance, overrides and polymorphism                | Wizards and Warriors              | [Code](./Inheritance/wizards-and-warriors/WizardsAndWarriors.cs)                            | [Notes](#wizards-and-warriors)              |
+| 16  | Extension methods and string ranges                    | Log Analysis                      | [Code](./ExtensionMethods/log-analysis/LogAnalysis.cs)                                      | [Notes](#log-analysis)                      |
+| 17  | Tuples, local variables and string ranges              | Phone Number Analysis             | [Code](./Tuples/phone-number-analysis/PhoneNumberAnalysis.cs)                               | [Notes](#phone-number-analysis)             |
+| 18  | Switches, type patterns and guards                     | Football Match Reports            | [Code](./Switches/football-match-reports/FootballMatchReports.cs)                           | [Notes](#football-match-reports)            |
+| 19  | Enums, parsing and numeric casts                       | Logs, Logs, Logs!                 | [Code](./Enums/logs-logs-logs/LogsLogsLogs.cs)                                              | [Notes](#logs-logs-logs)                    |
+| 20  | Exceptions, switch guards and return types             | Calculator Conundrum              | [Code](./Exceptions/calculator-conundrum/CalculatorConundrum.cs)                            | [Notes](#calculator-conundrum)              |
+| 21  | Casting, type patterns and exact types                 | Secure Munchester United          | [Code](./Casting/secure-munchester-united/SecureMunchesterUnited.cs)                        | [Notes](#secure-munchester-united)          |
+| 22  | Properties, accessors and validation                   | Weighing Machine                  | [Code](./Properties/weighing-machine/WeighingMachine.cs)                                    | [Notes](#weighing-machine)                  |
+| 23  | Expression bodies, switch expressions and readonly     | The Weather in Deather            | [Code](./Expressions/the-weather-in-deather/TheWeatherInDeather.cs)                         | [Notes](#the-weather-in-deather)            |
+| 24  | Method overloads, reuse and property initialization    | Wizards and Warriors 2.0          | [Code](./Classes2/wizards-and-warriors-2/WizardsAndWarriors2.cs)                            | [Notes](#wizards-and-warriors-20)           |
+| 25  | UTC, time zones, daylight saving and cultures          | Beauty Salon Goes Global          | [Code](./Time/beauty-salon-goes-global/BeautySalonGoesGlobal.cs)                            | [Notes](#beauty-salon-goes-global)          |
+| 26  | String alignment, Unicode and culture-aware formatting | High School Sweethearts           | [Code](./StringFormatting/high-school-sweethearts/HighSchoolSweethearts.cs)                 | [Notes](#high-school-sweethearts)           |
 
 ## Lucian's Luscious Lasagna
 
@@ -1674,3 +1675,114 @@ return isValid ? parsedDate : DateTime.MinValue;
 | `"11/25/2019 13:45:00"` | New York | November 25, 2019 at 13:45             |
 
 I use `Parse()` in `Schedule()` because its date strings are guaranteed valid. I use `TryParse()` here because invalid date text is an expected case and needs a fallback instead of a parsing exception.
+
+## High School Sweethearts
+
+### What I learned
+
+- Interpolation inserts values into text. Inside `{value,alignment:format}`, the comma controls spacing and the colon controls how the value is displayed.
+- Positive alignment pads on the left; negative alignment pads on the right. The width is a minimum, so a longer value is not cut off.
+- Unicode includes ASCII and many more characters. The outline heart `♡` can be written as `\u2661` in an ordinary C# string.
+- `$@"..."` combines interpolation with a verbatim string. It preserves the spaces and line breaks used to draw the heart.
+- `FormattableString` keeps the format and values available so I can apply a specific culture when producing the final string.
+
+This builds on [string trimming and interpolation](#log-levels), [Unicode](#squeaky-clean), and [cultures](#beauty-salon-goes-global).
+
+### 1. Choosing alignment or a format specifier
+
+```csharp
+$"{value,alignment:format}"
+```
+
+This shows the placeholder structure; `alignment` and `format` stand for the actual width and format I choose. Both parts are optional.
+
+| Syntax           | Purpose                                     | Example                                        |
+| ---------------- | ------------------------------------------- | ---------------------------------------------- |
+| `{studentA,29}`  | Right-align within at least 29 characters   | Spaces before the name                         |
+| `{studentB,-29}` | Left-align within at least 29 characters    | Spaces after the name                          |
+| `{loadsOf:E}`    | Scientific notation                         | `55.5` becomes `5.550000E+001` with US culture |
+| `{start:d}`      | Short date                                  | `22.01.2019` with German culture               |
+| `{hours:N2}`     | Thousands separators and two decimal places | `1.535,22` with German culture                 |
+
+`E+001` means multiply by 10 to the power of 1. Format letters are case-sensitive: for dates, `d` selects the short date and `D` selects the long date. Formatting changes the displayed text, not the original value.
+
+### 2. Centering the heart between names
+
+```csharp
+return $"{studentA,29} \u2661 {studentB,-29}";
+```
+
+The first name takes a 29-character field and ends next to the heart. The second name starts next to the heart in another 29-character field. The space, heart, and space between them add 3 characters: **29 + 3 + 29 = 61**. The heart is character 31, the center. The exercise guarantees that the names fit.
+
+ASCII represents 128 characters, including English letters, digits, basic punctuation, and control characters such as a newline. It has no heart character. Unicode includes those same characters with the same numbers, plus characters from many writing systems, symbols, and emoji.
+
+```csharp
+"Hello ♡"
+"Hello \u2661"
+```
+
+These produce the same text. `\u2661` is a Unicode escape: the four digits are hexadecimal (base 16). Unicode writes this character's number as `U+2661`. This escape works in an ordinary string; a verbatim string preserves backslashes literally.
+
+### 3. Drawing a fixed multiline banner
+
+```csharp
+public static string DisplayBanner(string studentA, string studentB)
+{
+    return $@"
+     ******       ******
+   **      **   **      **
+ **         ** **         **
+**            *            **
+**                         **
+**{studentA.Trim(),10}  +  {studentB.Trim(),-10}**
+ **                       **
+   **                   **
+     **               **
+       **           **
+         **       **
+           **   **
+             ***
+              *
+";
+}
+```
+
+`$` inserts the initials, while `@` preserves the artwork's line breaks and spaces. `Trim()` removes whitespace around each supplied set of initials before alignment. The test supplies `"L. G. "` and `"P. R. "`, each with a trailing space.
+
+Each trimmed value has 5 characters. A width of 10 adds 5 spaces before the first set and after the second, producing:
+
+```text
+**     L. G.  +  P. R.     **
+```
+
+I asked whether the heart could be generated instead of typed line by line. `new string('*', 6)` produces `"******"`, and loops can generate patterns, but they still need rules for the number of stars and spaces on each line. A literal multiline string makes this fixed shape easy to inspect. Generation becomes more useful when the shape must support different sizes.
+
+### 4. Formatting for German exchange students
+
+```csharp
+FormattableString statement =
+    $"{studentA} and {studentB} have been dating since {start:d} - that's {hours:N2} hours";
+
+return statement.ToString(
+    System.Globalization.CultureInfo.GetCultureInfo("de-DE"));
+```
+
+`de-DE` selects German conventions for Germany. With `d`, the date becomes `22.01.2019`. With `N2`, the hours become `1.535,22`: the period separates thousands and the comma separates the fractional part. The `2` requests exactly two decimal places, including trailing zeros when needed.
+
+The explicit `FormattableString` type keeps the values and formatting instructions until `ToString(culture)` creates the final string. Using `var` with this interpolated string would create an ordinary `string` immediately using the current culture. Applying German culture afterward would be too late to format the original values this way.
+
+For the test's inputs, the result is:
+
+```text
+Norbert and Heidi have been dating since 22.01.2019 - that's 1.535,22 hours
+```
+
+### Mistakes and fixes
+
+| Mistake                                                          | Cause                                                               | Fix                                                  |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------- |
+| Leaving `{start:}` and `{hours:}` empty                          | The placeholders have no format after the colon.                    | Supply `d` and `N2`, then apply German culture.      |
+| Splitting the initials across two source lines                   | A verbatim string preserves that line break in the output.          | Keep both initials and the plus sign on one line.    |
+| Adding one extra space on each of the bottom seven artwork lines | The heart's right edge and tip no longer match the expected string. | Remove the extra spaces to match the test's artwork. |
+
+The banner test calls `Trim()` on both complete strings. This removes whitespace only at their outer ends; it does not fix extra spaces or line breaks inside the heart.
