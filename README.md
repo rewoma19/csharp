@@ -34,6 +34,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 24  | Method overloads, reuse and property initialization    | Wizards and Warriors 2.0          | [Code](./Classes2/wizards-and-warriors-2/WizardsAndWarriors2.cs)                            | [Notes](#wizards-and-warriors-20)           |
 | 25  | UTC, time zones, daylight saving and cultures          | Beauty Salon Goes Global          | [Code](./Time/beauty-salon-goes-global/BeautySalonGoesGlobal.cs)                            | [Notes](#beauty-salon-goes-global)          |
 | 26  | String alignment, Unicode and culture-aware formatting | High School Sweethearts           | [Code](./StringFormatting/high-school-sweethearts/HighSchoolSweethearts.cs)                 | [Notes](#high-school-sweethearts)           |
+| 27  | Object initializers, nested objects and dictionaries   | Developer Privileges              | [Code](./ObjectInits/developer-privileges/DeveloperPrivileges.cs)                           | [Notes](#developer-privileges)              |
 
 ## Lucian's Luscious Lasagna
 
@@ -1786,3 +1787,104 @@ Norbert and Heidi have been dating since 22.01.2019 - that's 1.535,22 hours
 | Adding one extra space on each of the bottom seven artwork lines | The heart's right edge and tip no longer match the expected string. | Remove the extra spaces to match the test's artwork. |
 
 The banner test calls `Trim()` on both complete strings. This removes whitespace only at their outer ends; it does not fix extra spaces or line breaks inside the heart.
+
+## Developer Privileges
+
+### What I learned
+
+- An **object initializer** assigns properties as part of creating an object: `new Identity { Email = "admin@ex.ism", ... }`. The constructor still runs first; the initializer then assigns the listed properties.
+- A property's name and its type are different: in `public Identity Admin { get; }`, `Admin` is the name and `Identity` is the type I create with `new`.
+- A property can contain another object or a collection. Each assigned value must match that property's declared type.
+- A dictionary entry needs both a key and a value. In `Dictionary<string, Identity>`, the key is a string and the value is a complete `Identity` object.
+- `0.9m` is a `decimal` literal; `0.9` is a `double`. The `m` matches the type of `PhiltrumWidth`.
+
+This builds on [classes and objects](#jedliks-toys), [lists](#tracks-on-tracks-on-tracks), [dictionaries](#international-calling-connoisseur), and [properties](#weighing-machine).
+
+### 1. Initializing the Admin property
+
+This declaration belongs inside `Authenticator`:
+
+```csharp
+public Identity Admin { get; } = new Identity
+{
+    Email = "admin@ex.ism",
+    FacialFeatures = new FacialFeatures
+    {
+        EyeColor = "green",
+        PhiltrumWidth = 0.9m
+    },
+    NameAndAddress = new List<string>
+    {
+        "Chanakya",
+        "Mumbai",
+        "India"
+    }
+};
+```
+
+The `= new Identity { ... };` initializes `Admin` when an `Authenticator` is created. A separate variable named `admin` would not automatically assign this property.
+
+Inside the outer braces, I assign the three properties declared on `Identity`: `Email`, `FacialFeatures`, and `NameAndAddress`. Inside `new FacialFeatures`, I assign the properties declared on that class: `EyeColor` and `PhiltrumWidth`.
+
+`NameAndAddress` is an `IList<string>`, which describes a list of strings. `new List<string>` creates a concrete list that supports it. The name and the two address parts are separate elements at indexes `0`, `1`, and `2`.
+
+The supplied classes mark their properties `required`. For these classes, I must supply all of those properties when creating each object. This compiler check does not validate whether an email or address is meaningful.
+
+`{ get; }` lets callers read `Admin` without replacing it through a setter. It does not freeze the returned object's writable properties or its list contents.
+
+### 2. Putting objects into a dictionary
+
+Each entry follows this pattern:
+
+```text
+{ key, value }
+{ "Bertrand", an Identity object }
+```
+
+A dictionary initializer with one complete entry looks like this; my solution includes a second entry for Anders:
+
+```csharp
+public IDictionary<string, Identity> Developers { get; } =
+    new Dictionary<string, Identity>
+    {
+        {
+            "Bertrand",
+            new Identity
+            {
+                Email = "bert@ex.ism",
+                FacialFeatures = new FacialFeatures
+                {
+                    EyeColor = "blue",
+                    PhiltrumWidth = 0.8m
+                },
+                NameAndAddress = new List<string>
+                {
+                    "Bertrand",
+                    "Paris",
+                    "France"
+                }
+            }
+        }
+    };
+```
+
+The outer braces contain dictionary entries. Each entry's braces group a key and its value; the braces after `new Identity` initialize the object used as that value. A comma separates entries.
+
+I use the key to retrieve an object, then access its properties:
+
+```csharp
+var authenticator = new Authenticator();
+Identity developer = authenticator.Developers["Bertrand"];
+string email = developer.Email; // "bert@ex.ism"
+string city = developer.NameAndAddress[1]; // "Paris"
+```
+
+### Mistakes and fixes
+
+| Mistake                                                                   | Cause                                                                                                                             | Fix                                                                       |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Writing `new Admin` and declaring a separate `var admin` inside the class | `Admin` is a property, not a class. `var` cannot declare a class field, and the separate declaration does not initialize `Admin`. | Initialize the property directly with `= new Identity { ... };`.          |
+| Using a dictionary for facial features                                    | `Identity.FacialFeatures` expects a `FacialFeatures` object.                                                                      | Assign `new FacialFeatures { EyeColor = "green", PhiltrumWidth = 0.9m }`. |
+| Assigning `Name`, `Address1`, and `Address2`                              | Those properties do not exist on `Identity`.                                                                                      | Put the three strings in the `NameAndAddress` list.                       |
+| Using `0.9` for `PhiltrumWidth`                                           | A `double` is not implicitly converted to the required `decimal`.                                                                 | Use `0.9m`.                                                               |
+| Leaving entries as `{ "Bertrand", }` and `{ "Anders", }`                  | Each dictionary entry is missing its value.                                                                                       | Add a complete `new Identity { ... }` after each key.                     |
