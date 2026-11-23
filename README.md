@@ -35,6 +35,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 25  | UTC, time zones, daylight saving and cultures          | Beauty Salon Goes Global          | [Code](./Time/beauty-salon-goes-global/BeautySalonGoesGlobal.cs)                            | [Notes](#beauty-salon-goes-global)          |
 | 26  | String alignment, Unicode and culture-aware formatting | High School Sweethearts           | [Code](./StringFormatting/high-school-sweethearts/HighSchoolSweethearts.cs)                 | [Notes](#high-school-sweethearts)           |
 | 27  | Object initializers, nested objects and dictionaries   | Developer Privileges              | [Code](./ObjectInits/developer-privileges/DeveloperPrivileges.cs)                           | [Notes](#developer-privileges)              |
+| 28  | Interfaces, comparison and sorting                     | Remote Control Competition        | [Code](./Interfaces/remote-control-competition/RemoteControlCompetition.cs)                 | [Notes](#remote-control-competition)        |
 
 ## Lucian's Luscious Lasagna
 
@@ -1888,3 +1889,111 @@ string city = developer.NameAndAddress[1]; // "Paris"
 | Assigning `Name`, `Address1`, and `Address2`                              | Those properties do not exist on `Identity`.                                                                                      | Put the three strings in the `NameAndAddress` list.                       |
 | Using `0.9` for `PhiltrumWidth`                                           | A `double` is not implicitly converted to the required `decimal`.                                                                 | Use `0.9m`.                                                               |
 | Leaving entries as `{ "Bertrand", }` and `{ "Anders", }`                  | Each dictionary entry is missing its value.                                                                                       | Add a complete `new Identity { ... }` after each key.                     |
+
+## Remote Control Competition
+
+### What I learned
+
+- An **interface** describes capabilities a class must provide. Both car classes explicitly declare `: IRemoteControlCar`, even though they already have matching properties and methods.
+- A property declared as `{ get; }` in an interface requires public reading. The implementing class can still use `{ get; private set; }` so its own methods can update the value.
+- A class can implement multiple interfaces, separated by commas. The production car implements both `IRemoteControlCar` and `IComparable<ProductionRemoteControlCar>`.
+- `IComparable<T>` requires a `CompareTo()` method. Here, `T` is `ProductionRemoteControlCar`: the type of object I compare this car with.
+- `List<T>.Sort()` uses the cars' comparison method to order the existing list. It returns `void`, so I sort the list first and return the list separately.
+
+This builds on [properties and accessors](#weighing-machine), [lists](#tracks-on-tracks-on-tracks), [nullability](#tim-from-marketing), and [polymorphism](#wizards-and-warriors).
+
+### 1. Driving different cars through one interface
+
+```csharp
+public interface IRemoteControlCar
+{
+    int DistanceTravelled { get; }
+    void Drive();
+}
+```
+
+These declarations expose what callers can use without supplying the driving logic. Each car class implements the members and explicitly lists the interface in its declaration:
+
+```csharp
+public class ExperimentalRemoteControlCar : IRemoteControlCar
+{
+    public int DistanceTravelled { get; private set; }
+
+    public void Drive()
+    {
+        DistanceTravelled += 20;
+    }
+}
+```
+
+The production car's `Drive()` adds 10 instead. The track accepts either car through the shared interface:
+
+```csharp
+public static void Race(IRemoteControlCar car)
+{
+    car.Drive();
+}
+```
+
+`Race()` belongs inside `TestTrack`. Calling `TestTrack.Race(new ExperimentalRemoteControlCar())` runs the experimental car's implementation. Calling it with a production car runs that car's implementation. This is **polymorphism**: the same call uses different behavior depending on the object supplied.
+
+A getter-only interface does not freeze the distance. `Drive()` can still update it through the class's private setter; callers using the interface can only read it.
+
+### 2. Comparing one production car with another
+
+```csharp
+public class ProductionRemoteControlCar
+    : IRemoteControlCar, IComparable<ProductionRemoteControlCar>
+{
+    public int DistanceTravelled { get; private set; }
+    public int NumberOfVictories { get; set; }
+
+    public void Drive()
+    {
+        DistanceTravelled += 10;
+    }
+
+    public int CompareTo(ProductionRemoteControlCar? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
+
+        return NumberOfVictories.CompareTo(other.NumberOfVictories);
+    }
+}
+```
+
+`Drive()` and `CompareTo()` are separate methods inside the same class. Declaring the interface promises that `CompareTo()` exists; adding the method fulfills that promise.
+
+Inside `CompareTo()`, `NumberOfVictories` belongs to the current car, while `other.NumberOfVictories` belongs to the car passed in. The integer's own `CompareTo()` performs the comparison.
+
+| Result            | Meaning                            | Sorting position          |
+| ----------------- | ---------------------------------- | ------------------------- |
+| Less than zero    | This car has fewer victories       | Before the other car      |
+| Zero              | The cars have equal victory counts | Equal for this comparison |
+| Greater than zero | This car has more victories        | After the other car       |
+
+The sign matters; callers should not require exactly `-1` or `1`. A zero result does not mean the two cars are the same object.
+
+The `?` permits `other` to be `null`. By convention, an existing object compares greater than `null`, so that branch returns `1`. Otherwise, every path returns the comparison of the victory counts.
+
+### 3. Returning the cars in ascending order
+
+This method belongs inside `TestTrack`:
+
+```csharp
+public static List<ProductionRemoteControlCar> GetRankedCars(
+    ProductionRemoteControlCar prc1,
+    ProductionRemoteControlCar prc2)
+{
+    var cars = new List<ProductionRemoteControlCar> { prc1, prc2 };
+    cars.Sort();
+    return cars;
+}
+```
+
+The list contains the two supplied car objects. `Sort()` uses `CompareTo()` to place the car with fewer victories first. If `prc1` has 3 victories and `prc2` has 2, the returned list contains `prc2` at index `0` and `prc1` at index `1`.
+
+`CompareTo()` returns an **integer describing order**. `GetRankedCars()` returns a **list in that order**. Each method must return the type declared before its name.
