@@ -36,6 +36,7 @@ What I learn while completing the Exercism C# challenges, with examples and mist
 | 26  | String alignment, Unicode and culture-aware formatting | High School Sweethearts           | [Code](./StringFormatting/high-school-sweethearts/HighSchoolSweethearts.cs)                 | [Notes](#high-school-sweethearts)           |
 | 27  | Object initializers, nested objects and dictionaries   | Developer Privileges              | [Code](./ObjectInits/developer-privileges/DeveloperPrivileges.cs)                           | [Notes](#developer-privileges)              |
 | 28  | Interfaces, comparison and sorting                     | Remote Control Competition        | [Code](./Interfaces/remote-control-competition/RemoteControlCompetition.cs)                 | [Notes](#remote-control-competition)        |
+| 29  | Value equality, hash codes and sets                    | Face ID 2.0                       | [Code](./EqualityAndSets/faceid-2/Faceid2.cs)                                               | [Notes](#face-id-20)                        |
 
 ## Lucian's Luscious Lasagna
 
@@ -1997,3 +1998,151 @@ public static List<ProductionRemoteControlCar> GetRankedCars(
 The list contains the two supplied car objects. `Sort()` uses `CompareTo()` to place the car with fewer victories first. If `prc1` has 3 victories and `prc2` has 2, the returned list contains `prc2` at index `0` and `prc1` at index `1`.
 
 `CompareTo()` returns an **integer describing order**. `GetRankedCars()` returns a **list in that order**. Each method must return the type declared before its name.
+
+## Face ID 2.0
+
+### What I learned
+
+- **Value equality** checks whether objects have matching data. **Reference equality** checks whether two variables refer to the exact same object.
+- Overriding `Equals(object? obj)` defines value equality for my class. The override must match the inherited method's parameter type; `Equals(Identity auth)` cannot override it.
+- Equal objects must return the same hash code. Matching hash codes alone do not prove equal values or a shared object: different values can produce a **collision**, meaning the same hash code.
+- `HashSet<Identity>` stores unique identities using `GetHashCode()` and `Equals()`. `Add()` reports whether an identity was added; `Contains()` reports whether an equal identity is present.
+- A collection stored in an instance field survives between method calls on that object. Creating it inside `Register()` would create a fresh, empty set on every call.
+
+This builds on [overrides](#wizards-and-warriors), [type patterns](#secure-munchester-united), [instance fields](#jedliks-toys), and [expression bodies and readonly](#the-weather-in-deather).
+
+### 1. Defining equality for facial features and identities
+
+These methods belong inside `FacialFeatures`:
+
+```csharp
+public override bool Equals(object? obj)
+{
+    return obj is FacialFeatures other
+        && EyeColor == other.EyeColor
+        && PhiltrumWidth == other.PhiltrumWidth;
+}
+
+public override int GetHashCode()
+{
+    return HashCode.Combine(EyeColor, PhiltrumWidth);
+}
+```
+
+`obj is FacialFeatures other` checks the type and gives the matching object the name `other`. It returns `false` for `null`. The `&&` operator stops when a condition is false, so the property comparisons run only after a successful type check. Both facial properties must match.
+
+Inside `Identity`, I compare the email and reuse facial equality:
+
+```csharp
+public override bool Equals(object? obj)
+{
+    return obj is Identity other
+        && Email == other.Email
+        && FacialFeatures.Equals(other.FacialFeatures);
+}
+
+public override int GetHashCode()
+{
+    return HashCode.Combine(Email, FacialFeatures);
+}
+```
+
+`HashCode.Combine(Email, FacialFeatures)` uses the facial object's hash code too. Both classes use the same properties for equality and hashing. Those properties are assigned in constructors and have no setters, keeping their values stable while the objects are stored in a set.
+
+Equality compares any two identities. The special administrator values belong in `IsAdmin()`:
+
+```csharp
+public bool IsAdmin(Identity identity)
+{
+    var admin = new Identity(
+        "admin@exerc.ism", new FacialFeatures("green", 0.9m));
+    return admin.Equals(identity);
+}
+```
+
+Checking only the admin email would accept an identity with the wrong face. `AreSameFace()` also reuses the equality code with `return faceA.Equals(faceB);`.
+
+### 2. Using return or an arrow expression
+
+These are alternative implementations of the same method, with the same behavior. I use only one inside `Identity`:
+
+```csharp
+public override int GetHashCode()
+{
+    return HashCode.Combine(Email, FacialFeatures);
+}
+```
+
+```csharp
+public override int GetHashCode()
+    => HashCode.Combine(Email, FacialFeatures);
+```
+
+The arrow form is an **expression-bodied method**. For this value-returning method, it evaluates the expression and returns its result. A block with braces allows multiple statements, such as assigning a local variable before returning it.
+
+### 3. Remembering registered identities
+
+These members belong inside `Authenticator`:
+
+```csharp
+private readonly HashSet<Identity> registeredIds = new();
+
+public bool Register(Identity identity)
+{
+    return registeredIds.Add(identity);
+}
+
+public bool IsRegistered(Identity identity)
+{
+    return registeredIds.Contains(identity);
+}
+```
+
+Each `Authenticator` gets its own set. `new()` uses the field's declared type, `HashSet<Identity>`. `readonly` prevents replacing the field after initialization or construction; it does not prevent adding items to the set.
+
+`Add()` returns `true` for a new identity and `false` for a duplicate. `Contains()` returns `false` for a missing identity, including when the set is empty. Neither method needs an extra `if` statement to produce its Boolean result.
+
+```csharp
+var authenticator = new Authenticator();
+var first = new Identity("alice@example.com", new FacialFeatures("blue", 0.9m));
+var sameValues = new Identity("alice@example.com", new FacialFeatures("blue", 0.9m));
+
+authenticator.IsRegistered(first);      // false: the set is empty
+authenticator.Register(first);          // true: added
+authenticator.Register(sameValues);     // false: equal identity already stored
+authenticator.IsRegistered(sameValues); // true: value equality recognizes it
+```
+
+### 4. Checking for the exact same object
+
+```csharp
+public static bool AreSameObject(Identity identityA, Identity identityB)
+{
+    return ReferenceEquals(identityA, identityB);
+}
+```
+
+Assigning an object variable copies its reference; it does not create a second object. Calling `new Identity(...)` creates a separate object even if its values match:
+
+```csharp
+var a = new Identity("alice@example.com", new FacialFeatures("blue", 0.9m));
+var b = a;
+var c = new Identity("alice@example.com", new FacialFeatures("blue", 0.9m));
+```
+
+| Comparison                           | Result  | Reason                                                                          |
+| ------------------------------------ | ------- | ------------------------------------------------------------------------------- |
+| `ReferenceEquals(a, b)`              | `true`  | Both variables refer to one object.                                             |
+| `ReferenceEquals(a, c)`              | `false` | The objects were created separately.                                            |
+| `a.Equals(c)`                        | `true`  | My override compares their matching values.                                     |
+| `a.GetHashCode() == c.GetHashCode()` | `true`  | Equal values must have matching hashes; this does not prove reference equality. |
+
+### Mistakes and fixes
+
+| Mistake                                                                    | Cause                                                                                                                        | Fix                                                                                                             |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Writing `override Equals(Identity auth)` and checking only the admin email | The parameter type does not match the inherited method, and the comparison ignores the current identity and facial features. | Override `Equals(object? obj)`, compare both identities' values, and keep admin-specific values in `IsAdmin()`. |
+| Creating a `HashSet` inside `Register()`                                   | Every call starts with an empty set, losing previous registrations.                                                          | Store the set in an instance field.                                                                             |
+| Calling `add()`                                                            | C# method names are case-sensitive.                                                                                          | Use `Add()`.                                                                                                    |
+| Comparing hash codes in `AreSameObject()`                                  | Separate objects can have the same hash code.                                                                                | Use `ReferenceEquals()`.                                                                                        |
+| Leaving `AreSameFace()` throwing `NotImplementedException`                 | The placeholder throws whenever the tests call it, even though facial equality is implemented.                               | Return `faceA.Equals(faceB)`.                                                                                   |
